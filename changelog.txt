@@ -1,0 +1,149 @@
+﻿---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2024-02-03
+  Features:
+    - Added “Sentry Eye” little radar and grenades that places this “radars”.
+    - Added “Scan logic microprocessor” needed for “Sentry Eye” craft.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2024-02-03
+  Features:
+    - Added Prometheus shot sounds variations.
+    - Added Phosphorus Plasma grenade — researchable after “New Physics” technology.
+    - Added tank clone with grenade launcher instead of tank cannon.
+  Changes:
+    - Some localization changes.
+    - Fixed null collisions for buckshot, uranic needles and promethium needles grenade.
+    - Added null collisions to pluto grenades.
+    - Added short screen burn effect to Thermobaric grenade.
+    - Custom shadows for Thermobaric, Uranium & Promethium needles grenades.
+    - Spidetron with grenade launchers moved to new caterogy from mod.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.9
+Date: 2024-02-02
+  Features:
+    - Added “Iron Fist” grenade type — starting with frag & buckshot, single target piercing with faster firerate.
+    - Added “Uranium Fist” grenade type — like above, but for killing harder enemies. Both of “Fists” fully safe for you base, its cannot damage you structures.
+  Changes:
+    - Decresed plutonium grenade damage to 150 & 600/400 × 100 (vanilla uranium missle is 400 & 1000/1000 × 100) and radius, but increased firerate (cooldown modifier 9.5 → 8.5) and requirement the uranium-235 decreased 40 → 30 for pluto ammo “vanilla recipe”.
+    - Enhanced quality of models & textures for grenade sprites.
+    - Removed option to “shooting cases” with projectiles sprites of full grenades.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.8
+Date: 2024-02-01
+  Changes:
+    - Code improvements.
+    - Module armor Grenade Launcher got new name “Cyrus”.
+    - Added resistances values to vanilla worms: overheat (+), radiation (+), posttraumatic (+), overpressure (-), acid (+).
+    - Added resistances values to vanilla spawners: overpressure (-), poison (+), overheat (-), plasma (-), radiation (-).
+---------------------------------------------------------------------------------------------------
+Version: 0.1.7
+Date: 2024-02-01
+  Bugs:
+    - Fix crashes with Intermodal Containers mod.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2023-08-31
+  Bugs:
+    - Fast fix with PlutoniumEnergy mod crash.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2023-08-31
+  Bugs:
+    - Fast fix with MIRV mod crash.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.4
+Date: 2023-05-29
+  Features:
+    - Added 40-mm Venom Grenades — single-target poison with timed-damage.
+    - Added 40-mm Thermobaric Grenades.
+    - Added 40-mm Grenades with Directed Buckshots (shotgun with to enemy delivery function lol).
+    - Added 40-mm Promethium Grenades.
+    - Added 40-mm Uranium Frag Grenades with Uranium needles.
+    - Added Overpressure and Radiation damage types.
+    - Added biters/spitters/worms/spawns and some entities (not for all) resistances and de-resistances (more damage taken) for new damage types. Including and for Rampant biters (not for RampantFixed currently, this calculates resistances automatically and have some errors when I take to set it by own).
+  Changes:
+    - "40-mm ammunition based on the latest physics principles" & "40-mm biological and chemical ammunition" Technologies: Cost of Military Science Pack 2 → 1, added cost of 1 Utility Science Pack.
+    - Grenades now slowing on distance instead of acceleration.
+    - Grenade Launcher, Grenade Turret, GL Equip and ammo moved to own item group because of many items and plans to making new mods with many ammo types, like tank cannon turret, launcher for rocket-propelled grenades, rifles etc.
+    - Buckshot grenades have random direction of shot, will be fixed in future if possible.
+  Info:
+    - Thermobaric Grenades have directional only projectiles, i.e. after shot grenade will flying before reaching max distance, not cursor point, or before contact with enemy collision box. And with this feature thermobaric's fire range is greater than standard hand grenade launcher has.
+    - Promethium-147 not have detailed way to get, its just crafts from uranium in centrifuge. Recipe for Promethium unlocks with Kovarex enrichment technology.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2023-05-25
+  Features:
+    - Added 40-mm Plasma Grenades.
+    - Added 40-mm Stasis Grenades.
+    - Added 40-mm Shock Grenades.
+    - Added 40-mm Discharge Grenades.
+    - Added following damage types: Overheat, Plasma.
+    - Added Shoulder Grenade Launchers with above types.
+  Changes:
+    - Grenade turret and Spidertron with Grenade Launchers now homing projectiles based on enemy movement.
+    - Plutonium grenades technology now need to research "40-mm ammunition based on the latest physics principles" Technology, which unlocks Plasma and Stasis grenades.
+    - Fixed logical mistake with shoting grenade with cartrige case. If you want you can return shoting with cartrige case in mod settings lol.
+    - Shoulder Grenade Launchers: Energy consumption and damage modifiers now individual for every GL type.
+    - Some code rewritted from basic list to functions to generate similars items with one line. This now used to create ingame 40-mm grenade ammunition, shoulder grenade launchers, its recipes etc.
+    - Other minor changes and changes in technologies times and costs.
+  Info:
+    - Shoulder Grenade Launchers will not use similar homing due to very low accuracy during player's character movenment.
+    - Plasma Grenades have plasma, fire and explosion damage types, this good weapon against small groups and single targets. Applies to enemy "Overheat" with overheat damage during 5 sec.
+    - Stasis Grenades fully stuns enemy.
+    - Shock Grenades have electrical damage and making mini-stun on part of second.
+  Sounds:
+    - Added limitation parameters for sound repeating of explosions and shoting.
+    - Added sound for stasis explosion.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2023-05-22
+  Features:
+    - Added spidertron with grenade launchers.
+    - Added 40-mm Plutonium Grenades.
+    - Added 40-mm Shoulder Grenade Launchers as equipment with following types: Fragmentation, Cluster, High-explosive, Incendiary, Poison, Stun and Acidic.
+    - Plutonium cyan by default, but available option to make it more yellow-orange.
+    - Supports plutonium from PlutoniumEnergy, EnchantedNuclearPort, Angel's Industries.
+    - With Angel's Industries and EnchantedNuclearPort plutonium ammo yellow-orange by default.
+    - Added "Special Explosives" for craft Plutonium grenades instead of "Rocket control unit" from Atomic rocket recipe.
+  Info:
+    - Spidertron with GL requirenments similar to vanilla spidertron, but need to craft four "Prometheus" GL instead of four Rocket Launchers.
+    - 40-mm Plutonium Grenades need to install one of mods above or you can use to unlock this with mod settings (this forces recipe to use uranium-235 instead plutonium).
+    - 40-mm Plutonium Grenades have similar damage parameters to Atomic Rocket, but this will be changed in future (less damage and area).
+    - Special explosives can be throwed as grenades.
+    - Advanced Atomics mod: conflict. Issue with atomic explosion.
+  Changes:
+    - Cluster, HE and Incendiary grenades now have requirenment of Military 4 research. Incendiary grenade technology requires Cluster & HE, Acidic grenade technology requires Incendiary and Cluster & HE.
+    - Military 4 unlocks "Special Explosives".
+    - Acidic grenades: Added requirenment of 1 "Special Explosives" to craft.
+    - Technology "Grenade Weaponry": Count of science packs x100 → x130.
+    - Technology "Grenade Weaponry": Time of research 40 → 25.
+    - Technology "Grenade Weaponry": Added "Automation science pack" to ingredients.
+    - Shooting cooldown for "Prometheus" GL and Grenade Turret 21 → 45.
+    - Ammo category of 40-mm grenades changed from "grenade" to "PLORD_40mm_grenade_ammo".
+    - Technologies "Weapon Shooting Speed" 4-6 now increases firerate of of "PLORD_40mm_grenade_ammo" ammo type, +25/27/27% of shooting speed = ~18 shooting cooldown on full research for common grenades in "Prometheus" or GL Turret.
+    - Technologies "Stronger Explosives" 1-7-∞ now increases damage of "PLORD_40mm_grenade_ammo" ammo type - +7/7/10/10/15/17/17% and +17% every technology higher 7 tier.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 2023-05-21
+  Features:
+    - Added boolean mod setting to make enemy spawns breaths air for they be affected from poison cloud, but gives to them 5/25% resistance from poison damage.
+  Sounds:
+    - Added custom explosion sound for Acidic, High-explosive grenades.
+  Changes:
+    - Gas grenade: Damage coodown of poison cloud 30 → 20.
+    - Acidic grenade: Scale of visual explosion effect increased 1.25 → 1.4.
+    - Acidic grenade: Main damage area decreased 8 → 6.
+    - Acidic grenade: Secondary damage area decreased 10 → 8.
+    - Acidic grenade: Secondary damage decreased 10 → 5 physical & acidic types.
+    - High-explosive grenade: Added extra high 750 explosion damage on radius 0.05.
+    - High-explosive grenade: Changed animation sprite and it's color sets more red + added weak red light.
+    - Flare grenade: Light area spawns faster and have more yellow color.
+    - Other minor changes.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2023-05-20
+  Features:
+    - Added "Prometheus" 40-mm Grenade Launcher
+    - Added 40-mm Grenade Turret
+    - Added 40-mm grenade types: fragmentation, lighted fragmentation, flare, high-explosive, cluster, incendiary, gas, stun, acidic.

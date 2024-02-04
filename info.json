@@ -1,0 +1,14 @@
+{
+  "name": "PLORD_Prometheus_GrenadeLauncher",
+  "version": "0.2.1",
+  "title": "Prometheus Grenade Launcher",
+  "author": "Demer Nkardaz",
+  "contact": "",
+  "homepage": "",
+  "description": "Grenade launcher with various ammunition types and available as hand weapon, turret, spidertron, tank and armor equipment.\nSome of all ammunition: Frag, Armor-piercing, Cluster, Acidic, Plasma, Thermobaric, Incendiary, High-Explosive, Plutonium etc.",
+  "factorio_version": "1.1",
+  "dependencies": [
+    "base >= 1.1.0",
+    "flib >= 0.12.4"
+  ]
+}
