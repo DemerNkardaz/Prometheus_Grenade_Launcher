@@ -32,8 +32,9 @@ prometheus_core.create_40mm_ammo = function(array)
 		local recipe_ingredients = array.recipe_ingredients
 		local category_craft = array.category_craft
 		local action = array.action
-    local custom_shadow = array.custom_shadow
-    local shadow_name = array.shadow_name
+		local custom_shadow = array.custom_shadow
+		local shadow_name = array.shadow_name
+		local subgroup = array.subgroup
 		local direction_only = direction_only
 		local direction_deviation = direction_deviation
 		local range_deviation = range_deviation
@@ -49,15 +50,18 @@ prometheus_core.create_40mm_ammo = function(array)
 		end
 		if projectile_is_parented == true then
 				subname = parent_name
+		elseif array.clone then subname = array.clone
 		else
 				subname = name
 		end
+		if array.clone then clone_name = array.clone else clone_name = name end
+
 		if not projectile_is_empty then
-        if shadow_name then 
-          shadow_folder = prometheus_core.anim_to_projectile_sprite(prometheus_core.weapon_assets, "40mm_gl_" .. shadow_name .. "_shadow", glow, true, projectile_scale)
-              else 
-                shadow_folder = prometheus_core.anim_to_projectile_sprite(prometheus_core.weapon_assets, "40mm_gl" .. "_shadow", glow, true, projectile_scale) 
-        end
+				if shadow_name then 
+					shadow_folder = prometheus_core.anim_to_projectile_sprite(prometheus_core.weapon_assets, "40mm_gl_" .. shadow_name .. "_shadow", glow, true, projectile_scale)
+							else 
+								shadow_folder = prometheus_core.anim_to_projectile_sprite(prometheus_core.weapon_assets, "40mm_gl" .. "_shadow", glow, true, projectile_scale) 
+				end
 
 				if projectile_glow == true then
 						anim_folder = {prometheus_core.anim_to_single_layer(prometheus_core.anim_to_projectile_sprite(prometheus_core.weapon_assets, "40mm_gl" .. dash .. (subname or ""),
@@ -74,7 +78,7 @@ prometheus_core.create_40mm_ammo = function(array)
 		end
 
 		if not action then
-				action = gl_40mm_actions_list[name] or gl_40mm_actions_list["frag"]
+				action = gl_40mm_actions_list[clone_name] or gl_40mm_actions_list["frag"]
 		end
 
 		if collisions then
@@ -101,10 +105,10 @@ prometheus_core.create_40mm_ammo = function(array)
 				collision_box = nil
 		end
 		if ent_glow == true then
-				pic_folder = {prometheus_core.anim_to_single_layer(prometheus_core.assign_to_picture(prometheus_core.weapon_assets_40mm, (name or "") .. dash .. "box"),
-						prometheus_core.assign_to_picture(prometheus_core.weapon_assets_40mm, (name or "") .. dash .. "box_glow", true, "additive"))}
+				pic_folder = {prometheus_core.anim_to_single_layer(prometheus_core.assign_to_picture(prometheus_core.weapon_assets_40mm, (clone_name or "") .. dash .. "box"),
+						prometheus_core.assign_to_picture(prometheus_core.weapon_assets_40mm, (clone_name or "") .. dash .. "box_glow", true, "additive"))}
 		else
-				pic_folder = prometheus_core.assign_to_picture(prometheus_core.weapon_assets_40mm, (name or "") .. dash .. "box")
+				pic_folder = prometheus_core.assign_to_picture(prometheus_core.weapon_assets_40mm, (clone_name or "") .. dash .. "box")
 		end
 		if direction_setup == "thermobaric_setup" then
 				direction_only = true
@@ -118,25 +122,25 @@ prometheus_core.create_40mm_ammo = function(array)
 				range_deviation = 0.2
 				max_range = 60
 				min_range = 6
-    elseif direction_setup == "iron_fist_setup" then
+		elseif direction_setup == "iron_fist_setup" then
 				direction_only = false
 				direction_deviation = 0.25
 				range_deviation = 0.2
 				max_range = 60
 				min_range = 6
-    elseif direction_setup == "uran_fist_setup" then
+		elseif direction_setup == "uran_fist_setup" then
 				direction_only = false
 				direction_deviation = 0.25
 				range_deviation = 0.2
 				max_range = 80
 				min_range = 6
-    elseif direction_setup == "pluto_setup" then
+		elseif direction_setup == "pluto_setup" then
 				direction_only = false
 				direction_deviation = 0.1
 				range_deviation = 0.2
 				max_range = 160
 				min_range = 6
-    elseif direction_setup == "sentry_eye_setup" then
+		elseif direction_setup == "sentry_eye_setup" then
 				direction_only = false
 				direction_deviation = 0.3
 				range_deviation = 0.2
@@ -156,14 +160,17 @@ prometheus_core.create_40mm_ammo = function(array)
 				action = action
 		}})
 		if item_type == "ammo" then
-				data:extend({{
+				data:extend({
+					{
 						type = "ammo",
 						name = "PLORD_40mm_gl" .. dash .. (name or ""),
-						icon = prometheus_core.dir .. "graphics/icons/weapons/40mm_gl" .. dash .. (name or "") .. ".png",
+						localised_name = {"item-name.PLORD_40mm_gl" .. dash .. (clone_name or "")},
+						localised_description = {"item-description.PLORD_40mm_gl" .. dash .. (clone_name or "")},
+						icon = prometheus_core.dir .. "graphics/icons/weapons/40mm_gl" .. dash .. (clone_name or "") .. ".png",
 						icon_size = 128,
 						icon_mipmaps = 4,
 						magazine_size = magazine or 16,
-						subgroup = "PLORD_heavy_weapons_gl_ammo",
+						subgroup = subgroup or "PLORD_heavy_weapons_gl_ammo",
 						order = order or nil,
 						stack_size = stack or 50,
 						pictures = pic_folder,
@@ -198,15 +205,21 @@ prometheus_core.create_40mm_ammo = function(array)
 										}
 								}}
 						}
-				}, {
-						type = "recipe",
-						name = "PLORD_40mm_gl" .. dash .. (name or ""),
-						category = category_craft or nil,
-						enabled = false,
-						energy_required = energy_required or 5,
-						ingredients = recipe_ingredients or {},
-						result = "PLORD_40mm_gl" .. dash .. (name or "")
-				}})
+					}
+			})
+			if not array.clone then
+				data:extend({
+					{
+							type = "recipe",
+							name = "PLORD_40mm_gl" .. dash .. (name or ""),
+							category = category_craft or nil,
+							enabled = false,
+							energy_required = energy_required or 5,
+							ingredients = recipe_ingredients or {},
+							result = "PLORD_40mm_gl" .. dash .. (name or "")
+					}
+				})
+			end
 		end
 		return
 end
@@ -219,8 +232,8 @@ prometheus_core.shot_sound = function()
 				variations = 
 				{
 					{filename = prometheus_core.dir .. "sound/grenade_launcher_shot_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-          {filename = prometheus_core.dir .. "sound/grenade_launcher_shot_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-          {filename = prometheus_core.dir .. "sound/grenade_launcher_shot_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
+					{filename = prometheus_core.dir .. "sound/grenade_launcher_shot_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
+					{filename = prometheus_core.dir .. "sound/grenade_launcher_shot_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
 				}
 			}
 end

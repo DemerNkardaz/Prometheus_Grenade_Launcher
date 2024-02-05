@@ -112,22 +112,26 @@ PLORD_sentry_eye_entity.pictures =
           }
         },
         {
-          filename = prometheus_core.dir .. "graphics/entity/sentry_eye_entity_light.png",
+          filename = prometheus_core.dir .. "graphics/entity/sentry_eye_entity_light_colorable.png",
           draw_as_glow = true,
           width = 116,
           height = 128,
           line_length = 6,
           direction_count = 12,
+          apply_runtime_tint = true,
+          tint = {r = 1, g = 0, b = 0, a = 1},
           shift = util.by_pixel(1, 1),
           scale = 0.5 / 2 / 2,
           hr_version =
           {
-            filename = prometheus_core.dir .. "graphics/entity/sentry_eye_entity_light_hr.png",
+            filename = prometheus_core.dir .. "graphics/entity/sentry_eye_entity_light_colorable_hr.png",
             draw_as_glow = true,
             width = 233,
             height = 256,
             line_length = 6,
             direction_count = 12,
+            apply_runtime_tint = true,
+            tint = {r = 1, g = 0, b = 0, a = 1},
             shift = util.by_pixel(1, 1),
             scale = 0.5 / 2 / 2 / 2
           }
@@ -136,8 +140,54 @@ PLORD_sentry_eye_entity.pictures =
     }
 PLORD_sentry_eye_entity.water_reflection = nil
 
+
+
+PLORD_sentry_eye_entity_lightsource = flib_utils.copy_prototype(data.raw["lamp"]["small-lamp"], "PLORD_sentry_eye_entity_lightsource")
+PLORD_sentry_eye_entity_lightsource.minable = nil
+PLORD_sentry_eye_entity_lightsource.corpse = nil
+PLORD_sentry_eye_entity_lightsource.max_health = 10000
+PLORD_sentry_eye_entity_lightsource.energy_source =
+    {
+      type = "void"
+    }
+PLORD_sentry_eye_entity_lightsource.energy_usage_per_tick = "1W"
+PLORD_sentry_eye_entity_lightsource.circuit_wire_connection_point = nil
+PLORD_sentry_eye_entity_lightsource.circuit_connector_sprites = nil
+PLORD_sentry_eye_entity_lightsource.circuit_wire_max_distance = nil
+PLORD_sentry_eye_entity_lightsource.collision_box = {{0, 0}, {0, 0}}
+PLORD_sentry_eye_entity_lightsource.selection_box = {{0, 0}, {0, 0}}
+PLORD_sentry_eye_entity_lightsource.collision_mask = { "resource-layer" }
+PLORD_sentry_eye_entity_lightsource.light = {intensity = 0.7, size = 1, color = {r=0.9, g=0.1, b=0.12}}
+PLORD_sentry_eye_entity_lightsource.light_when_colored = {intensity = 0, size = 6, color = {r=1.0, g=1.0, b=0.2}}
+PLORD_sentry_eye_entity_lightsource.low_size = 2
+PLORD_sentry_eye_entity_lightsource.low_color_intensity = 0.1
+PLORD_sentry_eye_entity_lightsource.next_upgrade = nil
+PLORD_sentry_eye_entity_lightsource.signal_to_color_mapping = nil
+PLORD_sentry_eye_entity_lightsource.flags = {"not-blueprintable", "not-deconstructable", "placeable-off-grid", "not-on-map"}
+PLORD_sentry_eye_entity_lightsource.selectable_in_game = false
+PLORD_sentry_eye_entity_lightsource.picture_off =
+      {
+        filename = "__core__/graphics/empty.png",
+        priority = "high",
+        width = 1,
+        height = 1,
+        frame_count = 1,
+        axially_symmetrical = false,
+        direction_count = 1,
+      }
+PLORD_sentry_eye_entity_lightsource.picture_on =
+      {
+        filename = "__core__/graphics/empty.png",
+        priority = "high",
+        width = 1,
+        height = 1,
+        frame_count = 1,
+        axially_symmetrical = false,
+        direction_count = 1,
+      }
+
 data:extend({
-PLORD_gl_40mm_turret, PLORD_sentry_eye_entity,
+PLORD_gl_40mm_turret, PLORD_sentry_eye_entity_lightsource, PLORD_sentry_eye_entity,
   {
     type = "item",
     name = "PLORD_sentry_eye_microunit",

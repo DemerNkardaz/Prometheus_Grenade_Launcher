@@ -1,6 +1,6 @@
 ﻿---------------------------------------------------------------------------------------------------
 Version: 0.2.1
-Date: 2024-02-03
+Date: 2024-02-05
   Features:
     - Added “Sentry Eye” little radar and grenades that places this “radars”.
     - Added “Scan logic microprocessor” needed for “Sentry Eye” craft.

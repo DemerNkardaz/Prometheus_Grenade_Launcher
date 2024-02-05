@@ -1910,8 +1910,12 @@ data:extend({
 	}
 })
 
-table.insert(data.raw["technology"]["electronics"].effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_microunit"})
-table.insert(data.raw["technology"]["electronics"].effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_entity"})
+
+local electronics_tech = data.raw["technology"]["electronics"]
+  if not electronics_tech.effects then electronics_tech.effects = {} end
+  table.insert(electronics_tech.effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_microunit"})
+  table.insert(electronics_tech.effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_entity"})
+  
 table.insert(data.raw["technology"]["stronger-explosives-1"].effects, {type = "ammo-damage", ammo_category = "PLORD_40mm_grenade_ammo", modifier = 0.07})
 table.insert(data.raw["technology"]["stronger-explosives-2"].effects, {type = "ammo-damage", ammo_category = "PLORD_40mm_grenade_ammo", modifier = 0.07})
 table.insert(data.raw["technology"]["stronger-explosives-3"].effects, {type = "ammo-damage", ammo_category = "PLORD_40mm_grenade_ammo", modifier = 0.10})

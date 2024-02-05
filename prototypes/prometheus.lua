@@ -245,6 +245,20 @@ prometheus_grenade_types = {
   {
     {
       item_type = "ammo",
+      name = "sentry_eye_turret",
+      clone = "sentry_eye",
+      order = "e-a-a-b",
+      subgroup = "other",
+      ent_glow = true,
+      projectile_glow = true,
+      cooldown_modifier = 16.0,
+      range_modifier = 3.0,
+      direction_setup = "sentry_eye_setup"
+    }
+  },
+  {
+    {
+      item_type = "ammo",
       name = "iron_fist",
       order = "e-a-a-d",
       cooldown_modifier = 0.68,
@@ -670,6 +684,12 @@ gl_40mm_actions_list = {
         }
       }
     },
+  sentry_eye2 =
+    {
+      {
+        type = "direct"
+      }
+    },
   sentry_eye = 
     {
         {
@@ -681,7 +701,9 @@ gl_40mm_actions_list = {
           {
             {
               type = "create-entity",
-              entity_name = "PLORD_sentry_eye_entity"
+              entity_name = "PLORD_sentry_eye_entity",
+              trigger_created_entity = "true",
+              show_in_tooltip = "true"
             }
           }
         }
