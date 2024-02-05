@@ -43,7 +43,7 @@ global.sentryEye_observeRadius = 30
 
 local function sentryEye_enemyObserver(event, sentry_name)
     local tick = event.tick
-    if tick % 120 == 0 then
+    if tick % 60 == 0 then
         local entities = game.get_surface(1).find_entities_filtered{ name = sentry_name }
 
         local radius = global.sentryEye_observeRadius
@@ -185,7 +185,7 @@ local function event_register()
 
   end)
 
-  script.on_event(defines.events.on_tick, function(event) sentryEye_enemyObserver(event, "PLORD_sentry_eye_entity") end)
+  script.on_nth_tick(200, function(event) sentryEye_enemyObserver(event, "PLORD_sentry_eye_entity") end)
   
   script.on_event(defines.events.on_selected_entity_changed, function(event)
     sentryEye_renderCircle(event)
