@@ -20,4 +20,11 @@ data:extend({
 		default_value = false,
 		order = "a-a-c"
 	},
+	{
+		type = "bool-setting",
+		name = "PLORD_off_radar_bonus",
+		setting_type = "runtime-global",
+		default_value = false,
+		order = "a-a-a"
+	},
 })

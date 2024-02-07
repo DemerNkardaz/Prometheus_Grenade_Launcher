@@ -1,4 +1,10 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.2.2
+Date: 2024-02-05
+  Changes:
+    - “Sentry Eye” now got x2 radius bonus if it near in radius of 100 to radar. For each additional radar in the radius, another 15% coverage is added.
+    - Added runtime setting for off this feature (it can make some freezes on placing or removing a lot of radars and sentry eyes, and you can off it for you map).
+---------------------------------------------------------------------------------------------------
 Version: 0.2.1
 Date: 2024-02-05
   Features:

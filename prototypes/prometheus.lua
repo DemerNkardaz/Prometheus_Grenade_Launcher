@@ -280,7 +280,7 @@ prometheus_grenade_types = {
       item_type = "ammo",
       name = "pellets_piercing",
       piercing_damage = 100,
-      order = "e-a-a-b-b",
+      order = "e-a-a-e",
       collisions = "null_collisions",
       collision_force = "collision_only_enemy",
       energy_required = 15,
@@ -296,7 +296,7 @@ prometheus_grenade_types = {
       item_type = "ammo",
       name = "lighted",
       ent_glow = true,
-      order = "a-b",
+      order = "e-a-b",
       projectile_light = lighted_frag_light,
       projectile_glow = true,
       energy_required = 5,
@@ -330,6 +330,24 @@ prometheus_grenade_types = {
       name = "he",
       order = "e-a-d",
       cooldown_modifier = 1.25,
+      energy_required = 15,
+      recipe_ingredients = {
+        {"PLORD_40mm_gl", 2},
+        {"plastic-bar", 10},
+        {"cliff-explosives", 8}
+      }
+    }
+  },
+  {
+    {
+      item_type = "ammo",
+      name = "inferno",
+      order = "e-a-d-a",
+      piercing_damage = 100,
+      cooldown_modifier = 1.35,
+      range_modifier = 1.20,
+      collisions = "collisions",
+      collision_force = "collision_only_enemy",
       energy_required = 15,
       recipe_ingredients = {
         {"PLORD_40mm_gl", 2},
@@ -1113,6 +1131,72 @@ gl_40mm_actions_list = {
           }
         }
       }
+    },
+  inferno = 
+    {
+      {
+        type = "area",
+        trigger_from_target = true,
+        target_entities = false,
+        radius = 1,
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            type = "nested-result",
+            action =
+            {
+              type = "line",
+              range = 20,
+              width = 2,
+              action_delivery =
+              {
+                type = "instant",
+                target_effects =
+                {
+                  {
+                    type = "damage",
+                    damage = {amount = 50, type = "fire"}
+                  },
+                  {
+                    type = "damage",
+                    damage = {amount = 25, type = "explosion"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        type = "direct",
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "create-explosion",
+              entity_name = "PLORD_inferno_explosion"
+            },
+            {
+              type = "invoke-tile-trigger",
+              repeat_count = 1
+            },
+            {
+              type = "destroy-decoratives",
+              from_render_layer = "decorative",
+              to_render_layer = "object",
+              include_soft_decoratives = true,
+              include_decals = false,
+              invoke_decorative_trigger = true,
+              decoratives_with_trigger_only = false,
+              radius = 2.25
+            }
+          }
+        }
+      },
     },
   cluster_child = 
     {

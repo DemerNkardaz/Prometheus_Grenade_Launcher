@@ -2,6 +2,10 @@ game_core = {}
 flib_utils = {}
 cyrus_core = {}
 prometheus_core = {}
+sounds_package = {}
+sounds_package.explosions = {}
+anims_package = {}
+anims_package.explosions = {}
 
 game_core.hit_effects = require ("__base__.prototypes.entity.hit-effects")
 game_core.explosion_animations = require("__base__.prototypes.entity.explosion-animations")
@@ -19,6 +23,8 @@ game_core.base_ent_sounds_path = require("__base__.prototypes.entity.sounds")
 flib_utils.copy_prototype = require('__flib__.data-util').copy_prototype
 
 require "util"
+require ("anims")
+require ("sound")
 require ("prototypes/types")
 require ("prototypes/item_groups")
 require ("prototypes/prometheus")
@@ -27,708 +33,302 @@ require ("prototypes/resistances")
 require ("prototypes/data_additional")
 require ("prototypes/data_promethium")
 
-
-local PLORD_he_grenade_explosion = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_he_grenade_explosion")
-PLORD_he_grenade_explosion.light = {intensity = 0.35,  size = 35, color = {r=1.0, g=0.5, b=0.3}}
-PLORD_he_grenade_explosion.animations = 
-		{
-			filename = "__base__/graphics/entity/explosion/explosion-3.png",
-			draw_as_glow = true,
-			priority = "high",
-			line_length = 6,
-			width = 52,
-			height = 46,
-			frame_count = 17,
-			animation_speed = 0.5,
-			shift = util.by_pixel(-1,2),
-			scale = 4,
-			tint = {r=1.0, g=0.5, b=0.3, a = 1.0},
-			hr_version =
-			{
-				filename = "__base__/graphics/entity/explosion/hr-explosion-3.png",
-				draw_as_glow = true,
-				priority = "high",
-				line_length = 6,
-				width = 102,
-				height = 88,
-				frame_count = 17,
-				animation_speed = 0.5,
-				shift = util.by_pixel(-1,1.5),
-				scale = 4 * 0.5,
-				tint = {r=1.0, g=0.5, b=0.3, a = 1.0}
-			}
-		}
-PLORD_he_grenade_explosion.sound = {
-		aggregation = {max_count = 3, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = prometheus_core.dir .. "sound/he_grenade_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.5},
-			{filename = prometheus_core.dir .. "sound/he_grenade_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.4},
-			{filename = prometheus_core.dir .. "sound/he_grenade_explosion_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.5},
-		}
-}
-
-local PLORD_ironfist_hit_explosion = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_ironfist_hit_explosion")
-PLORD_ironfist_hit_explosion.light = {intensity = 0.35,  size = 5, color = {r=1.0, g=0.5, b=0.3}}
-PLORD_ironfist_hit_explosion.height = 0.2
-PLORD_ironfist_hit_explosion.created_effect =
-    {
-      type = "direct",
-      action_delivery =
-      {
-        type = "instant",
-        target_effects =
-        {
-          {
-            type = "create-particle",
-            repeat_count = 5,
-            particle_name = "burner-inserter-metal-particle-medium",
-            offset_deviation = { { -0.5, -0.4922 }, { 0.5, 0.4922 } },
-            initial_height = 0.3,
-            initial_height_deviation = 0.44,
-            initial_vertical_speed = 0.058,
-            initial_vertical_speed_deviation = 0.05,
-            speed_from_center = 0.04,
-            speed_from_center_deviation = 0.05
-          },
-          {
-            type = "create-particle",
-            repeat_count = 3,
-            particle_name = "burner-inserter-metal-particle-small",
-            offset_deviation = { { -0.5, -0.5 }, { 0.5, 0.5 } },
-            initial_height = 0.2,
-            initial_height_deviation = 0.5,
-            initial_vertical_speed = 0.08,
-            initial_vertical_speed_deviation = 0.05,
-            speed_from_center = 0.05,
-            speed_from_center_deviation = 0.05
-          },
-          {
-            type = "create-particle",
-            repeat_count = 1,
-            particle_name = "burner-inserter-mechanical-component-particle-medium",
-            offset_deviation = { { -0.5, -0.5 }, { 0.5, 0.5 } },
-            initial_height = 0.3,
-            initial_height_deviation = 0.4,
-            initial_vertical_speed = 0.06,
-            initial_vertical_speed_deviation = 0.049,
-            speed_from_center = 0.04,
-            speed_from_center_deviation = 0.05
-          }
-        }
-      }
-    }
-PLORD_ironfist_hit_explosion.animations = {
-      {
-        filename = "__base__/graphics/entity/small-explosion/small-explosion-1.png",
-        draw_as_glow = true,
-        priority = "high",
-        line_length = 6,
-        width = 44,
-        height = 90,
-        frame_count = 24,
-        animation_speed = 0.85,
-        shift = util.by_pixel(-1,-24),
-        scale = 0.5 / 2,
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/small-explosion/hr-small-explosion-1.png",
-          draw_as_glow = true,
-          priority = "high",
-          line_length = 6,
-          width = 88,
-          height = 178,
-          frame_count = 24,
-          animation_speed = 0.85,
-          shift = util.by_pixel(-1,-24),
-          scale = 0.5 / 2 / 2
-        }
-      },
-      {
-        filename = "__base__/graphics/entity/small-explosion/small-explosion-2.png",
-        draw_as_glow = true,
-        priority = "high",
-        line_length = 6,
-        width = 46,
-        height = 76,
-        frame_count = 24,
-        animation_speed = 0.85,
-        shift = util.by_pixel(2,-8),
-        scale = 0.5 / 2,
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/small-explosion/hr-small-explosion-2.png",
-          draw_as_glow = true,
-          priority = "high",
-          line_length = 6,
-          width = 92,
-          height = 152,
-          frame_count = 24,
-          animation_speed = 0.85,
-          shift = util.by_pixel(2,-7.5),
-          scale = 0.5 / 2 / 2
-        }
-      }
-    }
-PLORD_ironfist_hit_explosion.sound = {
-		aggregation = {max_count = 3, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_04.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-		}
-}
-
-
-
-
-local PLORD_sentry_eye_entity_explosion = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_sentry_eye_entity_explosion")
-PLORD_sentry_eye_entity_explosion.light = {intensity = 0.35,  size = 3, color = {r=1.0, g=0.7, b=0.8}}
-PLORD_sentry_eye_entity_explosion.height = 0.1
-PLORD_sentry_eye_entity_explosion.created_effect =
-    {
-      {
-        type = "area",
-        radius = 2,
-        action_delivery =
-        {
-          type = "instant",
-          target_effects =
-          {
-            {
-              type = "damage",
-              damage = {amount = 2, type = "explosion"}
-            }
-          }
-        }
-      }
-    }
-PLORD_sentry_eye_entity_explosion.animations = {
-      {
-        filename = "__base__/graphics/entity/small-explosion/small-explosion-1.png",
-        draw_as_glow = true,
-        priority = "high",
-        line_length = 6,
-        width = 44,
-        height = 90,
-        frame_count = 24,
-        animation_speed = 0.85,
-        shift = util.by_pixel(-1,-24),
-        scale = 0.5 / 1.5,
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/small-explosion/hr-small-explosion-1.png",
-          draw_as_glow = true,
-          priority = "high",
-          line_length = 6,
-          width = 88,
-          height = 178,
-          frame_count = 24,
-          animation_speed = 0.85,
-          shift = util.by_pixel(-1,-24),
-          scale = 0.5 / 2 / 1.5
-        }
-      },
-      {
-        filename = "__base__/graphics/entity/small-explosion/small-explosion-2.png",
-        draw_as_glow = true,
-        priority = "high",
-        line_length = 6,
-        width = 46,
-        height = 76,
-        frame_count = 24,
-        animation_speed = 0.85,
-        shift = util.by_pixel(2,-8),
-        scale = 0.5 / 1.5,
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/small-explosion/hr-small-explosion-2.png",
-          draw_as_glow = true,
-          priority = "high",
-          line_length = 6,
-          width = 92,
-          height = 152,
-          frame_count = 24,
-          animation_speed = 0.85,
-          shift = util.by_pixel(2,-7.5),
-          scale = 0.5 / 2 / 1.5
-        }
-      }
-    }
-PLORD_sentry_eye_entity_explosion.sound = {
-		aggregation = {max_count = 2, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = prometheus_core.dir .. "sound/sentry_eye_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.15},
-			{filename = prometheus_core.dir .. "sound/sentry_eye_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.15}
-		}
-}
-
-
-
-
-local PLORD_uranfist_hit_explosion = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_uranfist_hit_explosion")
-PLORD_uranfist_hit_explosion.light = {intensity = 0.35,  size = 5, color = {r=0.3, g=0.85, b=0.3}}
-PLORD_uranfist_hit_explosion.height = 0.2
-PLORD_uranfist_hit_explosion.created_effect =
-    {
-      type = "direct",
-      action_delivery =
-      {
-        type = "instant",
-        target_effects =
-        {
-          {
-            type = "create-particle",
-            repeat_count = 5,
-            particle_name = "burner-inserter-metal-particle-medium",
-            offset_deviation = { { -0.5, -0.4922 }, { 0.5, 0.4922 } },
-            initial_height = 0.3,
-            initial_height_deviation = 0.44,
-            initial_vertical_speed = 0.058,
-            initial_vertical_speed_deviation = 0.05,
-            speed_from_center = 0.04,
-            speed_from_center_deviation = 0.05
-          },
-          {
-            type = "create-particle",
-            repeat_count = 3,
-            particle_name = "burner-inserter-metal-particle-small",
-            offset_deviation = { { -0.5, -0.5 }, { 0.5, 0.5 } },
-            initial_height = 0.2,
-            initial_height_deviation = 0.5,
-            initial_vertical_speed = 0.08,
-            initial_vertical_speed_deviation = 0.05,
-            speed_from_center = 0.05,
-            speed_from_center_deviation = 0.05
-          },
-          {
-            type = "create-particle",
-            repeat_count = 1,
-            particle_name = "burner-inserter-mechanical-component-particle-medium",
-            offset_deviation = { { -0.5, -0.5 }, { 0.5, 0.5 } },
-            initial_height = 0.3,
-            initial_height_deviation = 0.4,
-            initial_vertical_speed = 0.06,
-            initial_vertical_speed_deviation = 0.049,
-            speed_from_center = 0.04,
-            speed_from_center_deviation = 0.05
-          }
-        }
-      }
-    }
-PLORD_uranfist_hit_explosion.animations = {
-      {
-        filename = "__base__/graphics/entity/small-explosion/small-explosion-1.png",
-        draw_as_glow = true,
-        priority = "high",
-        line_length = 6,
-        width = 44,
-        height = 90,
-        frame_count = 24,
-        animation_speed = 0.85,
-        shift = util.by_pixel(-1,-24),
-        scale = 0.5 / 2,
-        tint = {r=0.2, g=1.0, b=0.45, a = 1.0},
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/small-explosion/hr-small-explosion-1.png",
-          draw_as_glow = true,
-          priority = "high",
-          line_length = 6,
-          width = 88,
-          height = 178,
-          frame_count = 24,
-          animation_speed = 0.85,
-          shift = util.by_pixel(-1,-24),
-          scale = 0.5 / 2 / 2,
-          tint = {r=0.2, g=1.0, b=0.45, a = 1.0}
-        }
-      },
-      {
-        filename = "__base__/graphics/entity/small-explosion/small-explosion-2.png",
-        draw_as_glow = true,
-        priority = "high",
-        line_length = 6,
-        width = 46,
-        height = 76,
-        frame_count = 24,
-        animation_speed = 0.85,
-        shift = util.by_pixel(2,-8),
-        scale = 0.5 / 2,
-        tint = {r=0.2, g=1.0, b=0.45, a = 1.0},
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/small-explosion/hr-small-explosion-2.png",
-          draw_as_glow = true,
-          priority = "high",
-          line_length = 6,
-          width = 92,
-          height = 152,
-          frame_count = 24,
-          animation_speed = 0.85,
-          shift = util.by_pixel(2,-7.5),
-          scale = 0.5 / 2 / 2,
-          tint = {r=0.2, g=1.0, b=0.45, a = 1.0}
-        }
-      }
-    }
-PLORD_uranfist_hit_explosion.sound = {
-		aggregation = {max_count = 3, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-			{filename = prometheus_core.dir .. "sound/ironfist_explosion_04.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.3},
-		}
-}
-
-
-
-local PLORD_plasmaphos_explosion = flib_utils.copy_prototype(data.raw["explosion"]["big-explosion"], "PLORD_plasmaphos_explosion")
-PLORD_plasmaphos_explosion.light = {intensity = 0.5,  size = 20, color = {r=0.5, g=1.0, b=0.5}}
-PLORD_plasmaphos_explosion.animations = {
-    {
-      filename = prometheus_core.dir .. "graphics/entity/phosphorus_plasma_explosion.png",
-      draw_as_glow = true,
-      flags = { "compressed" },
-      width = 197,
-      height = 245,
-      frame_count = 47,
-      line_length = 6,
-      shift = {0.1875, -0.75},
-      animation_speed = 0.5,
-      scale = 2
-    }
-}
-PLORD_plasmaphos_explosion.sound = {
-		aggregation = {max_count = 3, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = prometheus_core.dir .. "sound/phosphorus_plasma_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.75},
-      {filename = prometheus_core.dir .. "sound/phosphorus_plasma_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.75},
-      {filename = prometheus_core.dir .. "sound/phosphorus_plasma_explosion_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.75},
-		}
-}
-
-local PLORD_plasmaphos_explosion_light = flib_utils.copy_prototype(data.raw["explosion"]["big-explosion"], "PLORD_plasmaphos_explosion_light")
-PLORD_plasmaphos_explosion_light.animations = {
-    {
-      filename = prometheus_core.dir .. "graphics/entity/phosphorus_plasma_explosion_dummy.png",
-      draw_as_glow = true,
-      flags = { "compressed" },
-      width = 197,
-      height = 245,
-      frame_count = 47,
-      line_length = 6,
-      shift = {0.1875, -0.75},
-      animation_speed = 5
-    }
-}
-PLORD_plasmaphos_explosion_light.light = {intensity = 0.85,  size = 50, color = {r=0.9, g=1.0, b=0.9}}
-PLORD_plasmaphos_explosion_light.sound = nil
-
-local PLORD_plasmaphos_explosion_light_green = flib_utils.copy_prototype(data.raw["explosion"]["big-explosion"], "PLORD_plasmaphos_explosion_light_green")
-PLORD_plasmaphos_explosion_light_green.animations = {
-    {
-      filename = prometheus_core.dir .. "graphics/entity/phosphorus_plasma_explosion_dummy.png",
-      draw_as_glow = true,
-      flags = { "compressed" },
-      width = 197,
-      height = 245,
-      frame_count = 47,
-      line_length = 6,
-      shift = {0.1875, -0.75},
-      animation_speed = 2
-    }
-}
-PLORD_plasmaphos_explosion_light_green.light = {intensity = 0.5,  size = 30, color = {r=0.9, g=1.0, b=0.5}}
-PLORD_plasmaphos_explosion_light_green.sound = nil
-
-
-local PLORD_plasmaphos_explosion_smoke = flib_utils.copy_prototype(data.raw["explosion"]["big-explosion"], "PLORD_plasmaphos_explosion_smoke")
-PLORD_plasmaphos_explosion_smoke.animations = {
-    {
-      filename = prometheus_core.dir .. "graphics/entity/phosphorus_plasma_explosion_smoke.png",
-      draw_as_glow = false,
-      flags = { "compressed" },
-      width = 197,
-      height = 245,
-      frame_count = 47,
-      line_length = 6,
-      shift = {0.1875, -0.75},
-      animation_speed = 0.5,
-      scale = 2
-    }
-}
-PLORD_plasmaphos_explosion_smoke.sound = nil
-
-
-
-
-local PLORD_venom_grenade_explosion = flib_utils.copy_prototype(data.raw["explosion"]["explosion-hit"], "PLORD_venom_grenade_explosion")
-PLORD_venom_grenade_explosion.sound = {
-		aggregation = {max_count = 3, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = "__base__/sound/creatures/Spiters_1_1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/creatures/Spiters_2_1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/creatures/Spiters_3_1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/creatures/Spiters_4_1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/creatures/Spiters_5_1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8}
-		}
-}
-local function create_plasma_explosion(copy_name, copy_from, sound, light, sprite, scale, tint, anim_speed, multiplication, width, height, width2, height2)
-	local type_expl = data.raw["explosion"]
-	local copy_name = flib_utils.copy_prototype(type_expl[copy_from], "" .. copy_name .. "")
-	copy_name.light = light or nil
-	copy_name.animations =
-		{
-			filename = prometheus_core.dir .. "graphics/entity/" .. sprite .. ".png",
-			draw_as_glow = true,
-			priority = "high",
-			line_length = 6,
-			width = (width or 52) * multiplication,
-			height = (height or 46) * multiplication,
-			frame_count = 17,
-			animation_speed = anim_speed or 0.5,
-			shift = util.by_pixel(-1,2),
-			tint = tint or nil,
-			scale = (scale or 6),
-			hr_version =
-			{
-				filename = prometheus_core.dir .. "graphics/entity/hr_" .. sprite ..".png",
-				draw_as_glow = true,
-				priority = "high",
-				line_length = 6,
-				width = (width2 or 102) * multiplication,
-				height = (height2 or 88) * multiplication,
-				frame_count = 17,
-				animation_speed = anim_speed or 0.5,
-				shift = util.by_pixel(-1,1.5),
-				tint = tint or nil,
-				scale = (scale or 6) * 0.5,
-
-			}
-		}
-	copy_name.sound = sound or type_expl[copy_from].sound
-	data:extend({copy_name})
-	return
-end
-local function plasma_puff()
-	return
-		{
-			aggregation = {max_count = 3, remove = true},
-			allow_random_repeat = true,
-			variations = 
-			{
-				{filename = "__base__/sound/fight/robot-explosion-1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-explosion-2.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-explosion-3.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-explosion-4.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-explosion-5.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-			}
-		}
-end
-local function shock_puff()
-	return
-		{
-			aggregation = {max_count = 3, remove = true},
-			allow_random_repeat = true,
-			variations = 
-			{
-				{filename = "__base__/sound/fight/robot-selfdestruct-01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-selfdestruct-02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-selfdestruct-03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-			}
-		}
-end
-local plasma_puff_light = {intensity = 0.57,  size = 60, color = {r=0.25, g=0.3, b=0.9}}
-local shock_puff_light = {intensity = 0.47,  size = 15, color = {r=0.87, g=0.9, b=0.99}}
-create_plasma_explosion("PLORD_plasma_grenade_explosion_hydroxygen", "explosion", plasma_puff(), plasma_puff_light, "plasma_explosion", 3, tint, anim_speed, 2)
-create_plasma_explosion("PLORD_shock_explosion", "explosion", shock_puff(), shock_puff_light, "shock_explosion", 2.5, tint, 2, 1)
-
-local PLORD_discharge_beam = flib_utils.copy_prototype(data.raw["beam"]["electric-beam"], "PLORD_discharge_beam")
-PLORD_discharge_beam.width = 1
-PLORD_discharge_beam.action =
-		{
-			type = "direct",
-			action_delivery =
-			{
-				type = "instant",
-				target_effects =
+local function initialize_explosions()
+	if (mods["MIRV"]) then
+				nk_fasfix_mirv =
 				{
 					{
-						type = "damage",
-						damage = { amount = 25, type = "electric"}
+						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-1.png",
+						width_in_frames = 5,
+						height_in_frames = 5
 					},
 					{
-						type = "push-back",
-						distance = 1
+						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-2.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					},
+					{
+						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-3.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					},
+					{
+						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-4.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					}
+				}
+				nk_fasfix_mirv_hr =
+				{
+					{
+						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-1.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					},
+					{
+						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-2.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					},
+					{
+						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-3.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					},
+					{
+						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-4.png",
+						width_in_frames = 5,
+						height_in_frames = 5
+					}
+				}
+			else 
+				nk_fasfix_mirv = data.raw["explosion"]["nuke-explosion"].animations.stripes
+				nk_fasfix_mirv_hr = data.raw["explosion"]["nuke-explosion"].animations.hr_version.stripes
+	end
+
+	local high_explosive_grenade_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_he_grenade_explosion")
+		this.light = {intensity = 0.35,  size = 35, color = {r=1.0, g=0.5, b=0.3}}
+		this.animations = anims_package.explosions.high_explosive()
+		this.sound = sounds_package.explosions.high_explosive()
+		data:extend({this})
+	end high_explosive_grenade_explosion()
+
+	local iron_fist_hit_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_ironfist_hit_explosion")
+		this.light = {intensity = 0.35,  size = 5, color = {r=1.0, g=0.5, b=0.3}}
+		this.height = 0.2
+		this.created_effect =
+			{
+				type = "direct",
+				action_delivery =
+				{
+					type = "instant",
+					target_effects =
+					{
+						{
+							type = "create-particle",
+							repeat_count = 5,
+							particle_name = "burner-inserter-metal-particle-medium",
+							offset_deviation = { { -0.5, -0.4922 }, { 0.5, 0.4922 } },
+							initial_height = 0.3,
+							initial_height_deviation = 0.44,
+							initial_vertical_speed = 0.058,
+							initial_vertical_speed_deviation = 0.05,
+							speed_from_center = 0.04,
+							speed_from_center_deviation = 0.05
+						},
+						{
+							type = "create-particle",
+							repeat_count = 3,
+							particle_name = "burner-inserter-metal-particle-small",
+							offset_deviation = { { -0.5, -0.5 }, { 0.5, 0.5 } },
+							initial_height = 0.2,
+							initial_height_deviation = 0.5,
+							initial_vertical_speed = 0.08,
+							initial_vertical_speed_deviation = 0.05,
+							speed_from_center = 0.05,
+							speed_from_center_deviation = 0.05
+						},
+						{
+							type = "create-particle",
+							repeat_count = 1,
+							particle_name = "burner-inserter-mechanical-component-particle-medium",
+							offset_deviation = { { -0.5, -0.5 }, { 0.5, 0.5 } },
+							initial_height = 0.3,
+							initial_height_deviation = 0.4,
+							initial_vertical_speed = 0.06,
+							initial_vertical_speed_deviation = 0.049,
+							speed_from_center = 0.04,
+							speed_from_center_deviation = 0.05
+						}
 					}
 				}
 			}
-		}
+		this.animations = anims_package.explosions.iron_fist()
+		this.sound = sounds_package.explosions.iron_fist()
+		data:extend({this})
+	end iron_fist_hit_explosion()
 
-local pellets_sound_1 = {
-			{filename = prometheus_core.dir .. "sound/pellets_grenade_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.55},
-			{filename = prometheus_core.dir .. "sound/pellets_grenade_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.55},
-		}
-local pellets_sound_2 = {
-			{filename = "__base__/sound/fight/pump-shotgun-1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-2.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-3.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-4.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-5.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.8},
-		}
-local pellets_sound_3 = {
-			{filename = "__base__/sound/fight/pump-shotgun-1.ogg", min_speed = 0.6, max_speed = 0.8, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-2.ogg", min_speed = 0.6, max_speed = 0.8, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-3.ogg", min_speed = 0.6, max_speed = 0.8, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-4.ogg", min_speed = 0.6, max_speed = 0.8, volume = 0.8},
-			{filename = "__base__/sound/fight/pump-shotgun-5.ogg", min_speed = 0.6, max_speed = 0.8, volume = 0.8},
-		}
+	local uran_fist_hit_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_ironfist_hit_explosion"], "PLORD_uranfist_hit_explosion")
+		this.light = {intensity = 0.35,  size = 5, color = {r=0.3, g=0.85, b=0.3}}
+		this.animations = anims_package.explosions.iron_fist("uranic")
+		data:extend({this})
+	end uran_fist_hit_explosion()
 
-local PLORD_pellets_grenade_explosion = flib_utils.copy_prototype(data.raw["explosion"]["explosion-hit"], "PLORD_pellets_grenade_explosion")
-PLORD_pellets_grenade_explosion.animations[1].scale = 2
-PLORD_pellets_grenade_explosion.sound = {
-		aggregation = {max_count = 4, remove = true},
-		allow_random_repeat = true,
-		variations = pellets_sound_2,
-		audible_distance_modifier = 0.7,
-	}
-local PLORD_pellets_piercing_grenade_explosion = flib_utils.copy_prototype(data.raw["explosion"]["explosion-hit"], "PLORD_pellets_piercing_grenade_explosion")
-PLORD_pellets_piercing_grenade_explosion.animations[1].scale = 2
-PLORD_pellets_piercing_grenade_explosion.sound = {
-		aggregation = {max_count = 4, remove = true},
-		allow_random_repeat = true,
-		variations = pellets_sound_3,
-		audible_distance_modifier = 0.7,
-	}
-	if (mods["MIRV"]) then
-			nk_fasfix_mirv =
+	local sentry_eye_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_sentry_eye_entity_explosion")
+		this.light = {intensity = 0.35,  size = 3, color = {r=1.0, g=0.7, b=0.8}}
+		this.height = 0.1
+		this.created_effect =
 			{
 				{
-					filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-1.png",
-					width_in_frames = 5,
-					height_in_frames = 5
-				},
-				{
-					filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-2.png",
-					width_in_frames = 5,
-					height_in_frames = 5
-				},
-				{
-					filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-3.png",
-					width_in_frames = 5,
-					height_in_frames = 5
-				},
-				{
-					filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-4.png",
-					width_in_frames = 5,
-					height_in_frames = 5
+					type = "area",
+					radius = 2,
+					action_delivery =
+					{
+						type = "instant",
+						target_effects =
+						{
+							{
+								type = "damage",
+								damage = {amount = 2, type = "explosion"}
+							}
+						}
+					}
 				}
 			}
-			nk_fasfix_mirv_hr =
+		this.animations = anims_package.explosions.sentry_eye()
+		this.sound = sounds_package.explosions.sentry_eye()
+		data:extend({this})
+	end sentry_eye_explosion()
+
+	local plasma_phosphorus_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["big-explosion"], "PLORD_plasmaphos_explosion")
+		this.light = {intensity = 0.5,  size = 20, color = {r=0.5, g=1.0, b=0.5}}
+		this.animations = anims_package.explosions.plasma_phosphorus()
+		this.sound = sounds_package.explosions.plasma_phosphorus()
+		data:extend({this})
+	end plasma_phosphorus_explosion()
+
+	local plasma_phosphorus_explosion_light = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_plasmaphos_explosion"], "PLORD_plasmaphos_explosion_light")
+		this.light = {intensity = 0.85,  size = 50, color = {r=0.9, g=1.0, b=0.9}}
+		this.animations = anims_package.explosions.plasma_phosphorus("dummy", 5)
+		this.sound = nil
+		data:extend({this})
+	end plasma_phosphorus_explosion_light()
+
+	local plasma_phosphorus_explosion_green_light = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_plasmaphos_explosion"], "PLORD_plasmaphos_explosion_light_green")
+		this.light = {intensity = 0.5,  size = 30, color = {r=0.9, g=1.0, b=0.5}}
+		this.animations = anims_package.explosions.plasma_phosphorus("dummy", 2)
+		this.sound = nil
+		data:extend({this})
+	end plasma_phosphorus_explosion_green_light()
+
+	local plasma_phosphorus_explosion_smoke = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_plasmaphos_explosion"], "PLORD_plasmaphos_explosion_smoke")
+		this.light = nil
+		this.animations = anims_package.explosions.plasma_phosphorus("smoke")
+		this.sound = nil
+		data:extend({this})
+	end plasma_phosphorus_explosion_smoke()
+
+	local venom_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["explosion-hit"], "PLORD_venom_grenade_explosion")
+		this.sound = sounds_package.explosions.venom()
+		data:extend({this})
+	end venom_explosion()
+
+	local plasma_hydroxygen_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["explosion"], "PLORD_plasma_grenade_explosion_hydroxygen")
+		this.light = {intensity = 0.57,  size = 60, color = {r=0.25, g=0.3, b=0.9}}
+		this.animations = anims_package.explosions.plasma_hydroxygen("plasma_explosion", 2, 3)
+		this.sound = sounds_package.explosions.plasma_hydroxygen()
+		data:extend({this})
+	end plasma_hydroxygen_explosion()
+
+	local shock_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["explosion"], "PLORD_shock_explosion")
+		this.light = {intensity = 0.47,  size = 15, color = {r=0.87, g=0.9, b=0.99}}
+		this.animations = anims_package.explosions.plasma_hydroxygen("shock_explosion", 1, 2.5, 1)
+		this.sound = sounds_package.explosions.shock()
+		data:extend({this})
+	end shock_explosion()
+
+	local inferno_explosion = function()
+		data:extend({
 			{
+				type = "explosion",
+				name = "PLORD_inferno_explosion",
+				localised_name = {"entity-name.artillery-cannon-muzzle-flash"},
+				flags = {"not-on-map", "hidden"},
+				subgroup = "explosions",
+				animations = anims_package.explosions.inferno(),
+				rotate = true,
+				height = 0,
+				correct_rotation = true,
+				light = {intensity = 0.6, size = 20, color = {r=1.0, g=0.85, b=0.6}},
+				sound = sounds_package.explosions.inferno(),
+				smoke = "smoke-fast",
+				smoke_count = 1,
+				smoke_slow_down_factor = 1
+			}
+		})
+	end inferno_explosion()
+
+	local discharge_explosion_beam = function()
+		local this = flib_utils.copy_prototype(data.raw["beam"]["electric-beam"], "PLORD_discharge_beam")
+		this.width = 1
+		this.action =
+			{
+				type = "direct",
+				action_delivery =
 				{
-					filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-1.png",
-					width_in_frames = 5,
-					height_in_frames = 5
-				},
-				{
-					filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-2.png",
-					width_in_frames = 5,
-					height_in_frames = 5
-				},
-				{
-					filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-3.png",
-					width_in_frames = 5,
-					height_in_frames = 5
-				},
-				{
-					filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-4.png",
-					width_in_frames = 5,
-					height_in_frames = 5
+					type = "instant",
+					target_effects =
+					{
+						{
+							type = "damage",
+							damage = { amount = 25, type = "electric"}
+						},
+						{
+							type = "push-back",
+							distance = 1
+						}
+					}
 				}
 			}
-		else 
-			nk_fasfix_mirv = data.raw["explosion"]["nuke-explosion"].animations.stripes
-			nk_fasfix_mirv_hr = data.raw["explosion"]["nuke-explosion"].animations.hr_version.stripes
-	end
-local PLORD_thermobaric_explosion = flib_utils.copy_prototype(data.raw["explosion"]["big-artillery-explosion"], "PLORD_thermobaric_explosion")
-PLORD_thermobaric_explosion.animations =
-	{
-		width = 316,
-		height = 360,
-		frame_count = 100,
-		draw_as_glow = true,
-		priority = "very-low",
-		flags = {"compressed"},
-		shift = util.by_pixel(1, -123),
-		animation_speed = 0.7,
-		scale = 1.35,
-		dice_y = 5,
-		stripes = nk_fasfix_mirv,
-		hr_version =
-		{
-			width = 628,
-			height = 720,
-			frame_count = 100,
-			draw_as_glow = true,
-			priority = "very-low",
-			flags = {"linear-magnification"},
-			shift = util.by_pixel(0.5, -122.5),
-			animation_speed = 0.7,
-			scale = 1.35 * 0.5,
-			dice_y = 5,
-			stripes = nk_fasfix_mirv_hr
-		}
-	}
-PLORD_thermobaric_explosion.sound = 
-	{
-		aggregation = {max_count = 3, remove = true},
-		allow_random_repeat = true,
-		variations = 
-		{
-			{filename = prometheus_core.dir .. "sound/thermobaric_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1},
-			{filename = prometheus_core.dir .. "sound/thermobaric_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1},
-			{filename = prometheus_core.dir .. "sound/thermobaric_explosion_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1},
-			{filename = prometheus_core.dir .. "sound/thermobaric_explosion_04.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1},
-		},
-		audible_distance_modifier = 2,
-	}
-local PLORD_thermobaric_explosion_bigass = flib_utils.copy_prototype(data.raw["explosion"]["big-artillery-explosion"], "PLORD_thermobaric_explosion_bigass")
-PLORD_thermobaric_explosion_bigass.render_layer = "projectile"
-PLORD_thermobaric_explosion_bigass.animations[1].animation_speed = 0.35
-PLORD_thermobaric_explosion_bigass.animations[1].scale = 1.25
-PLORD_thermobaric_explosion_bigass.animations[1].shift = {1, -6}
-PLORD_thermobaric_explosion_bigass.animations[1].flags = nil
-PLORD_thermobaric_explosion_bigass.sound = nil
+		data:extend({this})
+	end discharge_explosion_beam()
 
-data:extend({PLORD_he_grenade_explosion, PLORD_ironfist_hit_explosion, PLORD_uranfist_hit_explosion, PLORD_plasmaphos_explosion, PLORD_sentry_eye_entity_explosion, PLORD_plasmaphos_explosion_light, PLORD_plasmaphos_explosion_light_green, PLORD_plasmaphos_explosion_smoke, PLORD_venom_grenade_explosion, PLORD_discharge_beam, PLORD_thermobaric_explosion, PLORD_thermobaric_explosion_bigass, PLORD_pellets_grenade_explosion,
-PLORD_pellets_piercing_grenade_explosion})
+	local pellets_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["explosion-hit"], "PLORD_pellets_grenade_explosion")
+		this.animations[1].scale = 2
+		this.sound = sounds_package.explosions.pellets()
+		data:extend({this})
+	end pellets_explosion()
 
-local PLORD_thermobaric_explosion_light = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_thermobaric_explosion"], "PLORD_thermobaric_explosion_light")
-PLORD_thermobaric_explosion_light.animations.hr_version = nil
-PLORD_thermobaric_explosion_light.animations.stripes[1].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
-PLORD_thermobaric_explosion_light.animations.stripes[2].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
-PLORD_thermobaric_explosion_light.animations.stripes[3].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
-PLORD_thermobaric_explosion_light.animations.stripes[4].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
-PLORD_thermobaric_explosion_light.animations.tint = {r=0,g=0,b=0,a=0}
-PLORD_thermobaric_explosion_light.animations.animation_speed= 1
-PLORD_thermobaric_explosion_light.light = {intensity = 0.5, size = 100, color = {r = 0.8, g = 0.6, b = 0.2}}
-data:extend({PLORD_thermobaric_explosion_light})
+	local pellets_piercing_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_pellets_grenade_explosion"], "PLORD_pellets_piercing_grenade_explosion")
+		this.sound = sounds_package.explosions.pellets_piercing()
+		data:extend({this})
+	end pellets_piercing_explosion()
 
+	local thermobaric_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["big-artillery-explosion"], "PLORD_thermobaric_explosion")
+		this.animations = anims_package.explosions.thermobaric()
+		this.sound = sounds_package.explosions.thermobaric()
+		data:extend({this})
+	end thermobaric_explosion()
+
+	local thermobaric_bigass_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["big-artillery-explosion"], "PLORD_thermobaric_explosion_bigass")
+		this.render_layer = "projectile"
+		this.animations[1].animation_speed = 0.35
+		this.animations[1].scale = 1.25
+		this.animations[1].shift = {1, -6}
+		this.animations[1].flags = nil
+		this.sound = nil
+		data:extend({this})
+	end thermobaric_bigass_explosion()
+
+	local thermobaric_explosion_light = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_thermobaric_explosion"], "PLORD_thermobaric_explosion_light")
+		this.animations.hr_version = nil
+		this.animations.stripes[1].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
+		this.animations.stripes[2].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
+		this.animations.stripes[3].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
+		this.animations.stripes[4].filename = prometheus_core.dir .. "graphics/entity/fake_nuke.png"
+		this.animations.tint = {r=0,g=0,b=0,a=0}
+		this.animations.animation_speed= 1
+		this.light = {intensity = 0.5, size = 100, color = {r = 0.8, g = 0.6, b = 0.2}}
+		this.sound = nil
+		data:extend({this})
+	end thermobaric_explosion_light()
+end initialize_explosions()
 data:extend({
 	{
 		type = "sticker",
@@ -1003,7 +603,7 @@ data:extend({
 		fire_spread_cooldown = 10,
 		fire_spread_radius = 1.25
 	},
-  {
+	{
 		type = "sticker",
 		name = "PLORD_plasma_phosphor_debuff_sticker",
 		flags = {"not-on-map"},
@@ -1012,7 +612,7 @@ data:extend({
 		target_movement_modifier = 0.7,
 		damage_per_tick = { amount = 10 * 100 / 60 / 4, type = "overheat" }
 	},
-  {
+	{
 		type = "sticker",
 		name = "PLORD_plasma_phosphor_toxical_debuff_sticker",
 		flags = {"not-on-map"},
@@ -1912,10 +1512,10 @@ data:extend({
 
 
 local electronics_tech = data.raw["technology"]["electronics"]
-  if not electronics_tech.effects then electronics_tech.effects = {} end
-  table.insert(electronics_tech.effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_microunit"})
-  table.insert(electronics_tech.effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_entity"})
-  
+	if not electronics_tech.effects then electronics_tech.effects = {} end
+	table.insert(electronics_tech.effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_microunit"})
+	table.insert(electronics_tech.effects, {type = "unlock-recipe", recipe = "PLORD_sentry_eye_entity"})
+	
 table.insert(data.raw["technology"]["stronger-explosives-1"].effects, {type = "ammo-damage", ammo_category = "PLORD_40mm_grenade_ammo", modifier = 0.07})
 table.insert(data.raw["technology"]["stronger-explosives-2"].effects, {type = "ammo-damage", ammo_category = "PLORD_40mm_grenade_ammo", modifier = 0.07})
 table.insert(data.raw["technology"]["stronger-explosives-3"].effects, {type = "ammo-damage", ammo_category = "PLORD_40mm_grenade_ammo", modifier = 0.10})
