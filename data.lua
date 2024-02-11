@@ -239,6 +239,30 @@ local function initialize_explosions()
 		data:extend({this})
 	end shock_explosion()
 
+	local plasma_hydrargyrum_explosion = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["explosion"], "PLORD_plasma_grenade_explosion_hydrargyrum")
+		this.light = {intensity = 0.57,  size = 30, color = {r=0.345, g=0.74, b=0.96}}
+		this.animations = anims_package.explosions.plasma_hydroxygen("mercuric_explosion", 2, 3.5)
+		this.sound = sounds_package.explosions.plasma_hydrargyrum()
+		data:extend({this})
+	end plasma_hydrargyrum_explosion()
+
+	local plasma_hydrargyrum_explosion_light = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_plasmaphos_explosion"], "PLORD_hydrargyrum_explosion_light")
+		this.light = {intensity = 0.85,  size = 50, color = {r=0.776, g=0.855, b=0.914}}
+		this.animations = anims_package.explosions.plasma_phosphorus("dummy", 5)
+		this.sound = nil
+		data:extend({this})
+	end plasma_hydrargyrum_explosion_light()
+
+	local plasma_hydrargyrum_explosion_green_light = function()
+		local this = flib_utils.copy_prototype(data.raw["explosion"]["PLORD_plasmaphos_explosion"], "PLORD_hydrargyrum_explosion_light_green")
+		this.light = {intensity = 0.5,  size = 30, color = {r=0.788, g=0.859, b=0.824}}
+		this.animations = anims_package.explosions.plasma_phosphorus("dummy", 2)
+		this.sound = nil
+		data:extend({this})
+	end plasma_hydrargyrum_explosion_green_light()
+
 	local inferno_explosion = function()
 		data:extend({
 			{
@@ -484,6 +508,126 @@ data:extend({
 		action_cooldown = 20
 	},
 	{
+		type = "smoke-with-trigger",
+		name = "PLORD_40mm_grenade_hydrargyrum_cloud_visual_dummy",
+		flags = {"not-on-map"},
+		show_when_smoke_off = true,
+		particle_count = 14,
+		particle_spread = { 1.6 * 1.05, 1.6 * 0.6 * 1.05 },
+		particle_distance_scale_factor = 0.5,
+		particle_scale_factor = { 1, 0.707 },
+		particle_duration_variation = 80 * 3,
+		wave_speed = { 0.5 / 50, 0.5 / 30 },
+		wave_distance = { 1, 0.5 },
+		spread_duration_variation = 300 - 20,
+
+		render_layer = "object",
+
+		affected_by_wind = false,
+		cyclic = true,
+		duration = 40 * 25 + 5,
+		fade_away_duration = 3 * 80,
+		spread_duration = (200 - 20) / 2 ,
+		color = {r = 0.7, g = 0.7, b = 0.7, a = 0.322},
+
+		animation = data.raw["smoke-with-trigger"]["poison-cloud-visual-dummy"].animation,
+		working_sound = data.raw["smoke-with-trigger"]["poison-cloud-visual-dummy"].working_sound
+	},
+	{
+		type = "smoke-with-trigger",
+		name = "PLORD_40mm_grenade_hydrargyrum_cloud",
+		localised_name = {"", {"entity-name.poison-cloud"}},
+		flags = {"not-on-map"},
+		show_when_smoke_off = true,
+		particle_count = 18,
+		particle_spread = { 3.6 * 1.05, 3.6 * 0.6 * 1.05 },
+		particle_distance_scale_factor = 3,
+		particle_scale_factor = { 1, 0.707 },
+		wave_speed = { 1/60, 1/30 },
+		wave_distance = { 0.4, 0.2 },
+		spread_duration_variation = 50,
+		particle_duration_variation = 50 * 3,
+		render_layer = "object",
+
+		affected_by_wind = false,
+		cyclic = true,
+		duration = 40 * 30,
+		fade_away_duration = 1.5 * 80,
+		spread_duration = 30,
+		color = {r = 0.7, g = 0.7, b = 0.7, a = 0.7},
+
+		animation = data.raw["smoke-with-trigger"]["poison-cloud"].animation,
+		created_effect =
+		{
+			{
+				type = "cluster",
+				cluster_count = 15,
+				distance = 4,
+				distance_deviation = 5,
+				action_delivery =
+				{
+					type = "instant",
+					target_effects =
+					{
+						{
+							type = "create-smoke",
+							show_in_tooltip = false,
+							entity_name = "PLORD_40mm_grenade_hydrargyrum_cloud_visual_dummy",
+							initial_height = 0
+						}
+					}
+				}
+			},
+			{
+				type = "cluster",
+				cluster_count = 12,
+				distance = 4 * 1.5,
+				distance_deviation = 2,
+				action_delivery =
+				{
+					type = "instant",
+					target_effects =
+					{
+						{
+							type = "create-smoke",
+							show_in_tooltip = false,
+							entity_name = "PLORD_40mm_grenade_hydrargyrum_cloud_visual_dummy",
+							initial_height = 0
+						}
+					}
+				}
+			}
+		},
+		action =
+		{
+			type = "direct",
+			action_delivery =
+			{
+				type = "instant",
+				target_effects =
+				{
+					type = "nested-result",
+					action =
+					{
+						type = "area",
+						radius = 8,
+						entity_flags = {"breaths-air"},
+						action_delivery =
+						{
+							type = "instant",
+							target_effects =
+							{
+								type = "damage",
+								damage = { amount = 10, type = "poison"}
+							}
+						}
+					}
+				}
+			}
+		},
+		action_cooldown = 20
+	},
+	{
 		type = "sticker",
 		name = "PLORD_slowdown_sticker_1",
 		flags = {},
@@ -612,6 +756,43 @@ data:extend({
 		damage_interval = 5,
 		target_movement_modifier = 0.7,
 		damage_per_tick = { amount = 10 * 100 / 60 / 4, type = "overheat" }
+	},
+	{
+		type = "sticker",
+		name = "PLORD_plasma_hydrargyrum_debuff_sticker",
+		flags = {"not-on-map"},
+		duration_in_ticks = 5 * 60,
+		damage_interval = 5,
+		target_movement_modifier = 0.8,
+		damage_per_tick = { amount = 3 * 100 / 60, type = "overheat" },
+		spread_fire_entity = "fire-flame-on-tree",
+		fire_spread_cooldown = 10,
+		fire_spread_radius = 1.25
+	},
+	{
+		type = "sticker",
+		name = "PLORD_plasma_hydrargyrum_rad_sticker",
+		flags = {"not-on-map"},
+		duration_in_ticks = 5 * 60,
+		damage_interval = 5,
+		target_movement_modifier = 0.8,
+		damage_per_tick = { amount = 3 * 100 / 60, type = "radiation" },
+	},
+	{
+		type = "sticker",
+		name = "PLORD_plasma_hydrargyrum_rad_sticker_2",
+		flags = {"not-on-map"},
+		duration_in_ticks = 5 * 120,
+		damage_interval = 5,
+		damage_per_tick = { amount = 1 * 100 / 60, type = "radiation" },
+	},
+	{
+		type = "sticker",
+		name = "PLORD_plasma_hydrargyrum_traumaric_sticker",
+		flags = {"not-on-map"},
+		duration_in_ticks = 5 * 120,
+		damage_interval = 5,
+		damage_per_tick = { amount = 1 * 100 / 80, type = "posttraumatic" },
 	},
 	{
 		type = "sticker",
@@ -1514,6 +1695,34 @@ data:extend({
 			time = 60
 		},
 		order = "z-z-f-g"
+	},
+	{
+		type = "technology",
+		name = "PLORD_40mm_plasma_mercury",
+		icon_size = 256, icon_mipmaps = 4,
+		icon = prometheus_core.dir .. "graphics/technology/40mm_plasma_mercury.png",
+		effects =
+		{
+			{
+				type = "unlock-recipe",
+				recipe = "PLORD_40mm_gl_plasma_hydrargyrum"
+			}
+		},
+		prerequisites = {"military-4", "PLORD_40mm_newphysics", "PLORD_grenade_turret"},
+		unit =
+		{
+			count = 70,
+			ingredients =
+			{
+				{"automation-science-pack", 1},
+				{"military-science-pack", 1},
+				{"chemical-science-pack", 2},
+				{"utility-science-pack", 2},
+				{"logistic-science-pack", 1}
+			},
+			time = 120
+		},
+		order = "z-z-f-g-a"
 	}
 })
 

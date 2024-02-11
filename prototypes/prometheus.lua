@@ -2,6 +2,7 @@ lighted_frag_light = {intensity = 0.5, size = 35}
 flare_grenade_light = {intensity = 0.5, size = 35, color = {r=1.0, g=1.0, b=0.9}}
 plasma_hydroxygen_light = {intensity = 0.6, size = 5, color = {r=0.25, g=0.3, b=0.9}}
 plasma_phosphorus_light = {intensity = 0.5, size = 3, color = {r=0.5, g=0.96, b=0.7}}
+plasma_hydrargyrum_light = {intensity = 0.5, size = 5, color = {r=0.635, g=0.992, b=0.996}}
 plutonium_grenade_light = {intensity = 0.8, size = 8, color = {r=0, g=0.8, b=0.75}}
 uranium_fist_light = {intensity = 0.15, size = 1, color = {r=0, g=0.8, b=0.75}}
 
@@ -528,6 +529,8 @@ prometheus_grenade_types = {
       order = "e-a-k",
       cooldown_modifier = 1.3,
       projectile_light = plasma_hydroxygen_light,
+      projectile_glow = true,
+      shadow_name = "plasma_hydroxygen",
       energy_required = 20,
       recipe_ingredients = {
         {"PLORD_40mm_gl", 4},
@@ -546,6 +549,7 @@ prometheus_grenade_types = {
       order = "e-a-k-b",
       cooldown_modifier = 1.3,
       projectile_light = plasma_phosphorus_light,
+      projectile_glow = true,
       shadow_name = "plasma_phosphorus",
       energy_required = 20,
       recipe_ingredients = {
@@ -553,6 +557,28 @@ prometheus_grenade_types = {
         {"battery", 20},
         {"stone", 40},
         {"coal", 40}
+      },
+      category_craft = "chemistry"
+    }
+  },
+  {
+    {
+      item_type = "ammo",
+      name = "plasma_hydrargyrum",
+      ent_glow = true,
+      order = "e-a-k-b-b",
+      cooldown_modifier = 1.3,
+      projectile_light = plasma_hydrargyrum_light,
+      projectile_glow = true,
+      shadow_name = "plasma_hydrargyrum",
+      energy_required = 20,
+      recipe_ingredients = {
+        {"PLORD_40mm_gl", 5},
+        {"battery", 20},
+        {"stone", 40},
+        {"iron-ore", 10},
+        {type="fluid", name="steam", amount=150},
+        {type="fluid", name="sulfuric-acid", amount=50}
       },
       category_craft = "chemistry"
     }
@@ -2437,7 +2463,8 @@ gl_40mm_actions_list = {
             {
               type = "create-entity",
               entity_name = "PLORD_plasmaphos_explosion"
-            },{
+            },
+            {
               type = "create-entity",
               entity_name = "PLORD_plasmaphos_explosion_smoke"
             },
@@ -2555,6 +2582,160 @@ gl_40mm_actions_list = {
             {
               type = "damage",
               damage = {amount = 5, type = "overheat"}
+            }
+          }
+        }
+      }
+    },
+  plasma_hydrargyrum = 
+    {
+      {
+        type = "direct",
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "create-smoke",
+              show_in_tooltip = true,
+              entity_name = "PLORD_40mm_grenade_hydrargyrum_cloud",
+              initial_height = 0
+            },
+          }
+        }
+      },
+      {
+        type = "direct",
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "create-entity",
+              entity_name = "PLORD_plasma_grenade_explosion_hydrargyrum"
+            },
+            {
+              type = "create-entity",
+              entity_name = "PLORD_hydrargyrum_explosion_light"
+            },
+            {
+              type = "create-entity",
+              entity_name = "PLORD_hydrargyrum_explosion_light_green"
+            }
+          }
+        }
+      },
+      {
+        type = "area",
+        radius = 4,
+        show_in_tooltip = true,
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "create-sticker",
+              sticker = "PLORD_plasma_hydrargyrum_debuff_sticker",
+              show_in_tooltip = true,
+            },
+            {
+              type = "create-sticker",
+              sticker = "PLORD_plasma_hydrargyrum_rad_sticker",
+              show_in_tooltip = true,
+            }
+          }
+        }
+      },
+      {
+        type = "area",
+        radius = 10,
+        show_in_tooltip = true,
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "create-sticker",
+              sticker = "PLORD_plasma_hydrargyrum_rad_sticker_2",
+              show_in_tooltip = true,
+            },
+            {
+              type = "create-sticker",
+              sticker = "PLORD_plasma_hydrargyrum_traumaric_sticker",
+              show_in_tooltip = true,
+            },
+            {
+              type = "damage",
+              damage = {amount = 20, type = "plasma"}
+            },
+            {
+              type = "damage",
+              damage = {amount = 10, type = "radiation"}
+            }
+          }
+        }
+      },
+      {
+        type = "area",
+        radius = 1.5,
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "damage",
+              damage = {amount = 300, type = "plasma"}
+            },
+            {
+              type = "damage",
+              damage = {amount = 20, type = "explosion"}
+            },
+            {
+              type = "damage",
+              damage = {amount = 150, type = "radiation"}
+            }
+          }
+        }
+      },
+      {
+        type = "area",
+        radius = 15,
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "damage",
+              damage = {amount = 5, type = "overheat"}
+            },
+            {
+              type = "damage",
+              damage = {amount = 5, type = "radiation"}
+            }
+          }
+        }
+      },
+      {
+        type = "area",
+        radius = 20,
+        action_delivery =
+        {
+          type = "instant",
+          target_effects =
+          {
+            {
+              type = "damage",
+              damage = {amount = 2, type = "overheat"}
+            },
+            {
+              type = "damage",
+              damage = {amount = 5, type = "radiation"}
             }
           }
         }

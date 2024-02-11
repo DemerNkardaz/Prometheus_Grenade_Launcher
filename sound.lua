@@ -50,6 +50,19 @@ sounds_package.explosions.plasma_phosphorus = function()
 			}
 	}
 end
+sounds_package.explosions.plasma_hydrargyrum = function()
+	return
+	{
+		aggregation = {max_count = 3, remove = true},
+		allow_random_repeat = true,
+		variations = 
+			{
+				{filename = prometheus_core.dir .. "sound/hydrargyrum_explosion_01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.9},
+        {filename = prometheus_core.dir .. "sound/hydrargyrum_explosion_02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.9},
+        {filename = prometheus_core.dir .. "sound/hydrargyrum_explosion_03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 0.9}
+			}
+	}
+end
 sounds_package.explosions.venom = function()
 	return
 	{

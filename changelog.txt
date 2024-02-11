@@ -1,4 +1,12 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.2.4
+Date: 2024-02-11
+  Features:
+    - Added Mercuric Plasma grenade — researchable after “New Physics” technology. Kills enemies with plasma heat and tons of ultraviolet radiation and creating dangerous area of mercuric clouds.
+    - Written grenade items descriptions ingame.
+  Changes:
+    - New sprite for Hydroxygenic Plasma grenade.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.3
 Date: 2024-02-11
   Bugs:

@@ -66,6 +66,8 @@ Following types you can research and use in handle and stationary grenade launch
 
 &ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_plasma.svg)&emsp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_phosphorus.svg)
 
+&ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_hydrargyrum.svg)&emsp;
+
 &ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_uran_fist.svg)&emsp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_uran_needle.svg)
 
 &ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_promethium_needle.svg)&emsp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_pluto.svg)
@@ -84,4 +86,4 @@ You can enable recipe from uranium in settings or install [PlutoniumEnergy](http
 
 ![img](https://i.imgur.com/PFSbrdW.png)![img](https://i.imgur.com/F4GXr78.png)
 ![img](https://i.imgur.com/0r2Qfjt.png)![img](https://i.imgur.com/KMRQGKQ.png)
-![img](https://i.imgur.com/2fLimI1.png)
+![img](https://i.imgur.com/CoFQVXr.png)
