@@ -850,11 +850,11 @@ gl_40mm_actions_list = {
               },
               {
                 type = "damage",
-                damage = { amount = 75 , type = "physical"}
+                damage = { amount = 100, type = "physical"}
               },
               {
                 type = "damage",
-                damage = { amount = 25 , type = "explosion"}
+                damage = { amount = 60, type = "explosion"}
               },
             {
               type = "create-sticker",

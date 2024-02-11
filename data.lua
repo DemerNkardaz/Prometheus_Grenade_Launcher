@@ -6,6 +6,7 @@ sounds_package = {}
 sounds_package.explosions = {}
 anims_package = {}
 anims_package.explosions = {}
+anims_package.entity = {}
 
 game_core.hit_effects = require ("__base__.prototypes.entity.hit-effects")
 game_core.explosion_animations = require("__base__.prototypes.entity.explosion-animations")
@@ -1075,7 +1076,13 @@ if settings.startup["PLORD_make_spawns_breaths_air"].value then
 	end
 end
 
-
+if settings.startup["PLORD_disable_biters_blood"].value then
+	for e_name, entity in pairs(data.raw["unit"]) do
+			if (e_name:find("biter") or e_name:find("spitter")) and entity.damaged_trigger_effect then
+					entity.damaged_trigger_effect = nil
+			end
+	end
+end
 
 require("prototypes/data_spidertron")
 require("prototypes/data_tank")

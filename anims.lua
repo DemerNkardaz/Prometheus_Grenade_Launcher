@@ -1,3 +1,86 @@
+anims_package.entity.grenade_turret_wepaonry = function()
+	return
+    {
+      layers =
+      {
+        {
+          filename = "__base__/graphics/entity/tank/tank-turret.png",
+          priority = "low",
+          line_length = 8,
+          width = 90,
+          height = 67,
+          frame_count = 1,
+          direction_count = 64,
+          shift = util.by_pixel(2-2, -40.5 + 24),
+          animation_speed = 8,
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/tank/hr-tank-turret.png",
+            priority = "low",
+            line_length = 8,
+            width = 179,
+            height = 132,
+            frame_count = 1,
+            direction_count = 64,
+            shift = util.by_pixel(2.25-2, -40.5 + 24),
+            animation_speed = 8,
+            scale = 0.5
+          }
+        },
+        {
+          filename = "__base__/graphics/entity/tank/tank-turret-mask.png",
+          priority = "low",
+          line_length = 8,
+          width = 36,
+          height = 33,
+          frame_count = 1,
+          apply_runtime_tint = true,
+          direction_count = 64,
+          shift = util.by_pixel(2-2, -41.5 + 24),
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/tank/hr-tank-turret-mask.png",
+            priority = "low",
+            line_length = 8,
+            width = 72,
+            height = 66,
+            frame_count = 1,
+            apply_runtime_tint = true,
+            direction_count = 64,
+            shift = util.by_pixel(2-2, -41.5 + 24),
+            scale = 0.5
+          }
+        },
+        {
+          filename = "__base__/graphics/entity/tank/tank-turret-shadow.png",
+          priority = "low",
+          line_length = 8,
+          width = 97,
+          height = 67,
+          frame_count = 1,
+          draw_as_shadow = true,
+          direction_count = 64,
+          shift = util.by_pixel(58.5-50, -0.5),
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/tank/hr-tank-turret-shadow.png",
+            priority = "low",
+            line_length = 8,
+            width = 193,
+            height = 134,
+            frame_count = 1,
+            draw_as_shadow = true,
+            direction_count = 64,
+            shift = util.by_pixel(58.25-50, -0.5),
+            scale = 0.5
+          }
+        }
+      }
+    }
+end
+
+
+
 anims_package.explosions.high_explosive = function()
 	return
 	{

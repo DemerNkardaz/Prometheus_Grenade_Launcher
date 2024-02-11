@@ -22,9 +22,25 @@ data:extend({
 	},
 	{
 		type = "bool-setting",
+		name = "PLORD_disable_biters_blood",
+		setting_type = "startup",
+		default_value = false,
+		order = "a-a-d"
+	},
+  --[[
+	{
+		type = "bool-setting",
 		name = "PLORD_off_radar_bonus",
 		setting_type = "runtime-global",
 		default_value = false,
 		order = "a-a-a"
+	},
+  ]]--
+	{
+		type = "bool-setting",
+		name = "PLORD_reset_recipes",
+		setting_type = "runtime-global",
+		default_value = false,
+		order = "a-a-b"
 	},
 })

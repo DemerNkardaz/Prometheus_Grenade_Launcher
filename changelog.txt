@@ -1,9 +1,19 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.2.3
+Date: 2024-02-11
+  Bugs:
+    - Force disabled tiers that force apllied by 5Dim's mods next_upgrade for “Sentry Eye” (why it forces radar type to radar name... it so strange), which applies tier 2 basic radar instead my entity and crashes the game with bounding box difference.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.2
-Date: 2024-02-05
+Date: 2024-02-09
+  Features:
+    - Added runtime setting for reapply technologies effects for unlock recipes if game save have unlocking technologies researched previously before of adding those recipes.
+    - Added setup setting for disable biters and spitters blood if you have UPS drops with using some types of ammunition, e.g. Phosphoric Plasma.
   Changes:
-    - “Sentry Eye” now got x2 radius bonus if it near in radius of 100 to radar. For each additional radar in the radius, another 15% coverage is added.
-    - Added runtime setting for off this feature (it can make some freezes on placing or removing a lot of radars and sentry eyes, and you can off it for you map).
+    - Just changed gun-turret tower to tank tower for grenade turret for more difference with gun-turret.
+    - Increased damage for Uranium Fist 75/25 → 100/60.
+  Bugs:
+    - Fixed ability to place “Sentry Eye” on “Out of Map” tiles with mounting grenades. Now Sentry eye dies when you shot it to this tiles.
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.1
 Date: 2024-02-05
