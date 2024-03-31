@@ -1,4 +1,11 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.2.5
+Date: 2024-03-30
+  Changes:
+    - Some recipe changes when runned BZ mods, Krastorio or/and Space Exploration.
+  Bugs:
+    - Fixed Space Exploration adding a lot of science packs to technologies from Prometheus. But not completely solved.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.4
 Date: 2024-02-11
   Features:

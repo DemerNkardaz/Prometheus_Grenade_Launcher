@@ -15,6 +15,7 @@ game_core.math3d = require "math3d"
 game_core.fireutil = require("__base__.prototypes.fire-util")
 
 prometheus_core.dir = "__PLORD_Prometheus_GrenadeLauncher__/"
+prometheus_core.pfx = "PLORD"
 prometheus_core.weapon_assets_40mm = prometheus_core.dir .. "graphics/icons/weapons/40mm_gl_"
 prometheus_core.weapon_assets = prometheus_core.dir .. "graphics/entity/weapons/"
 prometheus_core.weapon_icons = prometheus_core.dir .. "graphics/icons/weapons/"
@@ -33,6 +34,14 @@ require ("prototypes/weapons")
 require ("prototypes/resistances")
 require ("prototypes/data_additional")
 require ("prototypes/data_promethium")
+
+require("prototypes/technology_setup")
+
+if mods["space-exploration"] then
+  table.insert(se_prodecural_tech_exclusions, "PLORD_")
+end
+
+
 
 local function initialize_explosions()
 	if (mods["MIRV"]) then
@@ -1268,7 +1277,6 @@ end
 require("prototypes/data_spidertron")
 require("prototypes/data_tank")
 require("prototypes/data_equip")
-
 prometheus_core.generateFuncCallFromArray(cyrus_core.create_cyrus_launcher, cyrus_launcher_equip_types)
 
 data:extend({
@@ -1300,16 +1308,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_iron_fist"
 			}
 		},
-		prerequisites = {"military-2", "military-science-pack", "plastics"},
+		prerequisites = technology_prerequisites.prometheus,
 		unit =
 		{
 			count = 130,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.prometheus,
 			time = 25
 		},
 		order = "d-e-a"
@@ -1327,16 +1330,11 @@ data:extend({
 				recipe = "PLORD_gl_40mm_turret"
 			}
 		},
-		prerequisites = {"PLORD_prometheus_gl", "military-3", "explosives"},
+		prerequisites = technology_prerequisites.grenade_turret,
 		unit =
 		{
 			count = 75,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 2},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.grenade_turret,
 			time = 100
 		},
 		order = "z-z-a"
@@ -1357,15 +1355,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_flare"
 			}
 		},
-		prerequisites = {"PLORD_prometheus_gl", "optics"},
+		prerequisites = technology_prerequisites.flares,
 		unit =
 		{
 			count = 25,
-			ingredients =
-			{
-				{"military-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.flares,
 			time = 25
 		},
 		order = "z-x-a"
@@ -1386,16 +1380,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_he"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_prometheus_gl", "cliff-explosives"},
+		prerequisites = technology_prerequisites.cluster_he,
 		unit =
 		{
 			count = 120,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 2},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.cluster_he,
 			time = 60
 		},
 		order = "z-z-a"
@@ -1412,16 +1401,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_pellets_piercing"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_prometheus_gl", "cliff-explosives"},
+		prerequisites = technology_prerequisites.pellets_piercing,
 		unit =
 		{
 			count = 70,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 2},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.pellets_piercing,
 			time = 20
 		},
 		order = "z-z-a"
@@ -1438,17 +1422,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_incendiary"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_grenade_turret", "PLORD_40mm_cluster_he"},
+		prerequisites = technology_prerequisites.incendiary,
 		unit =
 		{
 			count = 70,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.incendiary,
 			time = 60
 		},
 		order = "z-z-b"
@@ -1465,18 +1443,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_uranium_fist"
 			}
 		},
-		prerequisites = {"uranium-ammo", "PLORD_grenade_turret", "PLORD_40mm_cluster_he"},
+		prerequisites = technology_prerequisites.uranium_fist,
 		unit =
 		{
 			count = 750,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"logistic-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"military-science-pack", 1},
-				{"utility-science-pack", 1}
-			},
+			ingredients = technology_ingredients.uranium_fist,
 			time = 55
 		},
 		order = "z-z-b"
@@ -1493,18 +1464,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_uranium_frag"
 			}
 		},
-		prerequisites = {"uranium-ammo", "PLORD_grenade_turret", "PLORD_40mm_cluster_he"},
+		prerequisites = technology_prerequisites.uranium_frag,
 		unit =
 		{
 			count = 1000,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"logistic-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"military-science-pack", 1},
-				{"utility-science-pack", 1}
-			},
+			ingredients = technology_ingredients.uranium_frag,
 			time = 60
 		},
 		order = "z-z-b"
@@ -1521,18 +1485,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_promethium"
 			}
 		},
-		prerequisites = {"kovarex-enrichment-process", "PLORD_grenade_turret", "PLORD_40mm_gl_uranium_frag"},
+		prerequisites = technology_prerequisites.promethium,
 		unit =
 		{
 			count = 1000,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"logistic-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"military-science-pack", 1},
-				{"utility-science-pack", 1}
-			},
+			ingredients = technology_ingredients.promethium,
 			time = 60
 		},
 		order = "z-z-b"
@@ -1549,17 +1506,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_shock"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_grenade_turret", "PLORD_40mm_incendiary"},
+		prerequisites = technology_prerequisites.shock,
 		unit =
 		{
 			count = 70,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.shock,
 			time = 45
 		},
 		order = "z-z-b-b"
@@ -1588,18 +1539,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_stun"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_40mm_cluster_he", "PLORD_40mm_incendiary", "PLORD_grenade_turret"},
+		prerequisites = technology_prerequisites.bio_chemicals,
 		unit =
 		{
 			count = 200,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"utility-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.bio_chemicals,
 			time = 60
 		},
 		order = "z-z-e"
@@ -1616,18 +1560,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_thermobaric"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_40mm_bio_chemicals", "PLORD_grenade_turret"},
+		prerequisites = technology_prerequisites.thermobaric,
 		unit =
 		{
 			count = 100,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"utility-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.thermobaric,
 			time = 40
 		},
 		order = "z-z-e-f"
@@ -1652,18 +1589,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_discharge"
 			},
 		},
-		prerequisites = {"military-4", "PLORD_40mm_bio_chemicals", "PLORD_grenade_turret"},
+		prerequisites = technology_prerequisites.newphysics,
 		unit =
 		{
 			count = 200,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"utility-science-pack", 1},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.newphysics,
 			time = 60
 		},
 		order = "z-z-f"
@@ -1680,18 +1610,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_plasma_phosphorus"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_40mm_newphysics", "PLORD_grenade_turret"},
+		prerequisites = technology_prerequisites.plasma_phosphor,
 		unit =
 		{
 			count = 60,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"chemical-science-pack", 2},
-				{"utility-science-pack", 2},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.plasma_phosphor,
 			time = 60
 		},
 		order = "z-z-f-g"
@@ -1708,18 +1631,11 @@ data:extend({
 				recipe = "PLORD_40mm_gl_plasma_hydrargyrum"
 			}
 		},
-		prerequisites = {"military-4", "PLORD_40mm_newphysics", "PLORD_grenade_turret"},
+		prerequisites = technology_prerequisites.plasma_mercury,
 		unit =
 		{
 			count = 70,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"military-science-pack", 1},
-				{"chemical-science-pack", 2},
-				{"utility-science-pack", 2},
-				{"logistic-science-pack", 1}
-			},
+			ingredients = technology_ingredients.plasma_mercury,
 			time = 120
 		},
 		order = "z-z-f-g-a"
@@ -1772,19 +1688,11 @@ local function make_gl_pluto_tech(name, icon, effects, prerequisites)
 		icon_size = 256, icon_mipmaps = 4,
 		icon = prometheus_core.dir .. "graphics/technology/" .. icon .. ".png",
 		effects = effects or {{type = "unlock-recipe", recipe = "PLORD_40mm_gl_pluto"}},
-		prerequisites = prerequisites or {"military-4", "kovarex-enrichment-process", "PLORD_40mm_newphysics"},
+		prerequisites = prerequisites or technology_prerequisites.pluto,
 		unit =
 		{
 			count = 5000,
-			ingredients =
-			{
-				{"automation-science-pack", 1},
-				{"logistic-science-pack", 1},
-				{"chemical-science-pack", 1},
-				{"military-science-pack", 1},
-				{"production-science-pack", 1},
-				{"utility-science-pack", 1}
-			},
+			ingredients = technology_ingredients.pluto,
 			time = 40
 		},
 		order = "z-p-b-a-e"

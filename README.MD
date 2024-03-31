@@ -1,6 +1,4 @@
-
 ![Factorio](https://img.shields.io/badge/Mod ­-Prometheus Grenade Launcher-white?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACHFBMVEUAAAABAAAAAQAAAAEBAQEAAQEBAQDYhDvehje8eDmAgYDShj+ZZjPfhTfDdTiPUyvrkDynZTDafTTSeziCTSqeZzK2dTXWgT2NUzSAgQCMWjhtRjTVfTZ3QyJBQEDefzRrLA1gLQdwLASFOQtPLinkjELLeDZtLwxJJBKWPQ+cSxtkMiJdOiP1kz1XIgawYy2STyZlPi63dDpxRCVeIQbFjlVXOSmcbDusbjZ4Mgx2OhS/YCHTpW5GIhRnOhtDLCW2czeEOg+FNA2oYy7KllwnGhbNZjK/dTYpHxh9UTFOKhiAAQFIMCY3IhcdEg4oHBkpGxUZEBFbNhsvIh95RSFpOhsbDQ0AAQAyIxkAAABJMyQqIh4oHBq2bCzgijunZTSfViqtYy2yfU2udT6xay2zaiu3aii1aC2gXCynWiiuYiuYWS2qc0e5eD25bCqjYSmcWiSdVyO1aCulYyqZVCaXSR24dT2yaCmXVCWlXSevZiqFRSDEgEivaS2YXyyvZCqnYCq2bzGseUWpZSqJVSexajKyZyh/Ox2SYDaiZSqVVSaybje2aCmCPBiqYSacYSqlZCzBayurYSmdXy2vaSmfWia6dz66ayZyPh6NUyekXCamZiqrZSyoYSu3bTO7aCvFbiehVyNNJxdvSCuaXClLKRd/SSOiYSm6bSu5aii0YiaHQxxxPBySVidHJxlzOx1YLRdTOCGeXij///+agzK/AAAAXXRSTlMAAAAAAAAAcN1nAlUFF8mflsS//v64O12UAmBUPcEEv9t6e9+7aKHaDhHf/RbeeH7Cb27Hd3zjGv7YDRDd/ppnxNp4edy2BcYzWFQClFg2ufy6vo6gwBQDUQFp32wXrE9IAAAAAWJLR0Sz2m3/fgAAAAd0SU1FB+gBGRUfFOvfuZIAAAEASURBVBjTY2AAAUYGdg5OEM0I4nFx8zDw8sXyMzAwMTEwA0UF4gSFhOMTRETFxCUkQSqkEpOSU1LT0jMys7KlQXpkcnLz8gsKi4pLSmXlmIAC8mXlFQqKSsqVVdUqzMwMqmo1tXXqGgyMmlr1Ddo6LAy6jU3NLXoMTAxM+q1t7QaGDEbGHZ1dJkCdTKbdPb19ZgxM5hb9EyytmJisbSZOsrWzB8o4TJ4y1dHJ2WXa9BmurEClbu4zZ82eM3fe/AULF3mAnOG5eMnSZctXrFy1es1aLxagy719fP38163fEBAYtDEY5DtGNqCPQjaFhjGHR0SCvc4MdERUdAwrA9jvAKfIPnSoBwHcAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTAxLTI1VDIxOjMxOjIwKzAyOjAwi07nmgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wMS0yNVQyMTozMToyMCswMjowMPoTXyYAAAAASUVORK5CYII=) ![](https://img.shields.io/factorio-mod-portal/v/PLORD_Prometheus_GrenadeLauncher?color=yellow&label=✪ ‍) ![](https://img.shields.io/factorio-mod-portal/last-updated/PLORD_Prometheus_GrenadeLauncher?color=yellow&label=🡅 ‍) ![Factorio Mod Portal downloads](https://img.shields.io/factorio-mod-portal/dt/PLORD_Prometheus_GrenadeLauncher?color=yellow&label=🡇 ‍) ![](https://img.shields.io/github/repo-size/DemerNkardaz/Prometheus_Grenade_Launcher?logo=github&label=Repo&color=white)
-
 
 # Help
 
@@ -10,7 +8,6 @@
 
 Use console in saved game to update available recipes after mod is updated.
 This is not required for a new game.
-­
 
 # PROMETHEUS
 
@@ -48,6 +45,7 @@ Following types you can research and use in handle and stationary grenade launch
 
 &ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_buckshot.svg)&emsp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_iron_fist.svg)
 ­
+
 #### Researchable types
 
 &ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_buckshot_piercing.svg)&emsp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_frag_lighted.svg)
@@ -73,6 +71,7 @@ Following types you can research and use in handle and stationary grenade launch
 &ensp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_promethium_needle.svg)&emsp;![](https://raw.githubusercontent.com/DemerNkardaz/svg_plates/main/svg/static_pluto.svg)
 ­
 ­
+
 ##### NOTE: PLUTO
 
 `[Plutonium grenade commonly disabled]`

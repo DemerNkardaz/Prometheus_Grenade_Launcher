@@ -205,7 +205,8 @@ prometheus_grenade_types = {
       energy_required = 5,
       recipe_ingredients = {
         {"copper-plate", 10},
-        {"steel-plate", 4}, {"coal", 10}
+        {"steel-plate", 4},
+        {"coal", 10}
       }
     }
   },
@@ -270,10 +271,7 @@ prometheus_grenade_types = {
       shadow_name = "iron_fist",
       energy_required = 7,
       piercing_damage = 75,
-      recipe_ingredients = {
-        {"iron-plate", 8},
-        {"steel-plate", 2}, {"coal", 5}
-      }
+      recipe_ingredients = {}
     }
   },
   {
