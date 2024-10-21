@@ -44,58 +44,6 @@ end
 
 
 local function initialize_explosions()
-	if (mods["MIRV"]) then
-				nk_fasfix_mirv =
-				{
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-1.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					},
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-2.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					},
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-3.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					},
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/nuke-explosion-4.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					}
-				}
-				nk_fasfix_mirv_hr =
-				{
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-1.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					},
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-2.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					},
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-3.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					},
-					{
-						filename = "__base__/graphics/entity/nuke-explosion/hr-nuke-explosion-4.png",
-						width_in_frames = 5,
-						height_in_frames = 5
-					}
-				}
-			else 
-				nk_fasfix_mirv = data.raw["explosion"]["nuke-explosion"].animations.stripes
-				nk_fasfix_mirv_hr = data.raw["explosion"]["nuke-explosion"].animations.hr_version.stripes
-	end
-
 	local high_explosive_grenade_explosion = function()
 		local this = flib_utils.copy_prototype(data.raw["explosion"]["grenade-explosion"], "PLORD_he_grenade_explosion")
 		this.light = {intensity = 0.35,  size = 35, color = {r=1.0, g=0.5, b=0.3}}
@@ -278,7 +226,7 @@ local function initialize_explosions()
 				type = "explosion",
 				name = "PLORD_inferno_explosion",
 				localised_name = {"entity-name.artillery-cannon-muzzle-flash"},
-				flags = {"not-on-map", "hidden"},
+				flags = {"not-on-map"},
 				subgroup = "explosions",
 				animations = anims_package.explosions.inferno(),
 				rotate = true,
@@ -371,7 +319,7 @@ data:extend({
 
 		animation =
 		{
-			filename = "__base__/graphics/entity/fire-flame/fire-flame-13.png",
+			filename = prometheus_core.dir .. "graphics/entity/fire-flame/fire-flame-13.png",
 			line_length = 8,
 			width = 60,
 			height = 118,
@@ -462,7 +410,7 @@ data:extend({
 						},
 						{
 							type = "play-sound",
-							sound = game_core.base_ent_sounds_path.poison_capsule_explosion(0.15)
+							sound = game_core.base_ent_sounds_path.poison_capsule_explosion
 						}
 					}
 				}
@@ -694,13 +642,12 @@ data:extend({
 		localised_name = {"entity-name.big-explosion"},
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
-		flags = {"not-on-map", "hidden"},
+		flags = {"not-on-map"},
 		subgroup = "explosions",
 		animations = 
 		{
 			filename = prometheus_core.dir .. "graphics/entity/big_explosion_grey.png",
 			draw_as_glow = true,
-			flags = { "compressed" },
 			width = 197,
 			height = 245,
 			frame_count = 47,
@@ -725,13 +672,12 @@ data:extend({
 		localised_name = {"entity-name.big-explosion"},
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
-		flags = {"not-on-map", "hidden"},
+		flags = {"not-on-map"},
 		subgroup = "explosions",
 		animations = 
 		{
 			filename = prometheus_core.dir .. "graphics/entity/fake_explosion.png",
 			draw_as_glow = true,
-			flags = { "compressed" },
 			width = 197,
 			height = 245,
 			frame_count = 47,
@@ -818,7 +764,7 @@ data:extend({
 		localised_name = {"entity-name.explosion"},
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
-		flags = {"not-on-map", "hidden"},
+		flags = {"not-on-map"},
 		subgroup = "explosions",
 		animations =
 		{
@@ -864,7 +810,7 @@ data:extend({
 		localised_name = {"entity-name.explosion"},
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
-		flags = {"not-on-map", "hidden"},
+		flags = {"not-on-map"},
 		subgroup = "explosions",
 		animations =
 		{
@@ -953,7 +899,7 @@ data:extend({
 			shift = util.by_pixel(-1,2),
 			scale = 0,
 		},
-		flags = {"not-on-map", "hidden"},
+		flags = {"not-on-map"},
 		subgroup = "explosions",
 		sound = {
 			aggregation = {max_count = 3, remove = true},
@@ -1083,7 +1029,7 @@ data:extend({
 				scale = 4 * 0.5,
 			}
 		},
-		flags = {"not-on-map", "hidden"},
+		flags = {"not-on-map"},
 		subgroup = "explosions",
 	},
 	{
@@ -1111,7 +1057,7 @@ data:extend({
 
 		animation =
 		{
-			filename = "__base__/graphics/entity/fire-flame/fire-flame-13.png",
+			filename = prometheus_core.dir .. "graphics/entity/fire-flame/fire-flame-13.png",
 			line_length = 8,
 			width = 60,
 			height = 118,
@@ -1212,7 +1158,7 @@ data:extend({
 		spread_delay_deviation = 180,
 		maximum_spread_count = 100,
 	
-		emissions_per_second = 0.005,
+		emissions_per_second = { pollution = 0.005 },
 	
 		initial_lifetime = 500,
 		lifetime_increase_by = 150,
@@ -1236,7 +1182,7 @@ data:extend({
 		spread_delay_deviation = 180,
 		maximum_spread_count = 100,
 	
-		emissions_per_second = 0.005,
+		emissions_per_second = { pollution = 0.005 },
 	
 		initial_lifetime = 1000,
 		lifetime_increase_by = 150,
@@ -1251,10 +1197,10 @@ PLORD_thermobaric_fire_flame.damage_per_tick = {amount = 1 / 60, type = "fire"}
 PLORD_thermobaric_fire_flame.maximum_damage_multiplier = 7
 PLORD_thermobaric_fire_flame.initial_lifetime = 1000
 PLORD_thermobaric_fire_flame.maximum_lifetime = 1000 * 2
-PLORD_thermobaric_fire_flame.emissions_per_second = 0.01
+PLORD_thermobaric_fire_flame.emissions_per_second = { pollution = 0.01 }
 data:extend({PLORD_thermobaric_fire_flame})
 local thermobaric_fire_tint = {r=0.43,g=0.6,b=1,a=0.6}
-for i = 1, 13 do data.raw["fire"]["PLORD_thermobaric_fire_flame"].pictures[i].tint = thermobaric_fire_tint end
+-- for i = 1, 13 do data.raw["fire"]["PLORD_thermobaric_fire_flame"].pictures[i].tint = thermobaric_fire_tint end
 
 prometheus_core.generateFuncCallFromArray(prometheus_core.create_40mm_ammo, prometheus_grenade_types)
 prometheus_core.generateFuncCallFromArray(prometheus_core.apply_resistance, prometheus_resistances_table)

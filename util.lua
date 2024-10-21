@@ -174,6 +174,7 @@ prometheus_core.create_40mm_ammo = function(array)
 						order = order or nil,
 						stack_size = stack or 50,
 						pictures = pic_folder,
+						ammo_category = "PLORD_40mm_grenade_ammo",
 						ammo_type = {
 								category = "PLORD_40mm_grenade_ammo",
 								target_type = target_type or "position",
@@ -216,7 +217,7 @@ prometheus_core.create_40mm_ammo = function(array)
 							enabled = false,
 							energy_required = energy_required or 5,
 							ingredients = recipe_ingredients or {},
-							result = "PLORD_40mm_gl" .. dash .. (name or "")
+							results = {{type = "item", name = "PLORD_40mm_gl" .. dash .. (name or ""), amount = 1}},
 					}
 				})
 			end
@@ -328,6 +329,7 @@ cyrus_core.create_cyrus_launcher = function(array)
 			turn_range = 1.0 / 5.0,
 			damage_modifier = damage_modifier or 1.25,
 			sound = gun_sounds or prometheus_core.shot_sound(),
+			ammo_category = "PLORD_40mm_grenade_ammo",
 			ammo_type =
 			{
 				category = "PLORD_40mm_grenade_ammo",
@@ -356,12 +358,12 @@ cyrus_core.create_cyrus_launcher = function(array)
 			energy_required = recipe_energy or 10,
 			ingredients =
 			{
-				{"PLORD_40mm_gl" .. dash .. (name or ""), recipe_count or 20},
-				{"processing-unit", 20},
-				{"low-density-structure", 5},
-				{"PLORD_gl_40mm_turret", 5},
+				{type = "item", name = "PLORD_40mm_gl" .. dash .. (name or ""), amount = recipe_count or 20},
+				{type = "item", name = "processing-unit", amount = 20},
+				{type = "item", name = "low-density-structure", amount = 5},
+				{type = "item", name = "PLORD_gl_40mm_turret", amount = 5},
 			},
-			result = "PLORD_personal_shoulder_gl40mm" .. dash .. (name or "")
+			results = {{type = "item", name = "PLORD_personal_shoulder_gl40mm" .. dash .. (name or ""), amount = 1}},
 		},
 	})
 	if tech_on == true then
@@ -471,100 +473,133 @@ prometheus_core.assign_to_picture = function(asset, file_name, glow, blend, scal
 end
 
 prometheus_core.replaceIngredient = function(array)
-  for _, recipe in pairs(data.raw.recipe) do
-    if recipe.name == array.recipe then
-      if array.ingredients then
-        local filteredIngredients = {}
-        for _, ingredient in pairs(array.ingredients) do
-          if type(ingredient) == "table" then
-            for _, subIngredient in ipairs(ingredient) do
-                if type(subIngredient) == "table" then
-                    if subIngredient.type == "fluid" and data.raw.fluid[subIngredient.name] then
-                        table.insert(filteredIngredients, subIngredient)
-                        break
-                    elseif #subIngredient == 2 and (data.raw.ammo[subIngredient[1]] or data.raw.capsule[subIngredient[1]] or data.raw.item[subIngredient[1]]) then
-                        table.insert(filteredIngredients, subIngredient)
-                        break
-                    elseif #subIngredient > 2 and #subIngredient % 2 == 0 then
-                        for i = 1, #subIngredient, 2 do
-                            if (data.raw.ammo[subIngredient[i]] or data.raw.capsule[subIngredient[i]] or data.raw.item[subIngredient[i]]) then
-                                table.insert(filteredIngredients, {subIngredient[i], subIngredient[i + 1]})
-                                break
-                            end
-                        end
-                    end
-                end
-            end
-            if ingredient.type == "fluid" and data.raw.fluid[ingredient.name] then
-              table.insert(filteredIngredients, ingredient)
-            elseif #ingredient == 2 and (data.raw.ammo[ingredient[1]] or data.raw.capsule[ingredient[1]] or data.raw.item[ingredient[1]]) then
-              table.insert(filteredIngredients, ingredient)
-            elseif #ingredient > 2 and #ingredient % 2 == 0 then
-              for i = 1, #ingredient, 2 do
-                if (data.raw.ammo[ingredient[i]] or data.raw.capsule[ingredient[i]] or data.raw.item[ingredient[i]]) then
-                  table.insert(filteredIngredients, {ingredient[i], ingredient[i + 1]})
-                  break
-                end
-              end
-            end
-          elseif type(ingredient) == "string" and (data.raw.ammo[ingredient] or data.raw.capsule[ingredient] or data.raw.item[ingredient]) then
-            table.insert(filteredIngredients, ingredient)
-          end
+		for _, recipe in pairs(data.raw.recipe) do
+				if recipe.name == array.recipe then
+						if array.ingredients then
+								local filteredIngredients = {}
+								for _, ingredient in pairs(array.ingredients) do
+										if type(ingredient) == "table" then
+												for _, subIngredient in ipairs(ingredient) do
+														if type(subIngredient) == "table" then
+																if subIngredient.type == "fluid" and data.raw.fluid[subIngredient.name] then
+																		table.insert(filteredIngredients, subIngredient)
+																		break
+																elseif #subIngredient == 2 and
+																		(data.raw.ammo[subIngredient[1]] or data.raw.capsule[subIngredient[1]] or
+																				data.raw.item[subIngredient[1]]) then
+																		table.insert(filteredIngredients, {
+																				type = "item",
+																				name = subIngredient[1],
+																				amount = subIngredient[2]
+																		})
+																		break
+																elseif #subIngredient > 2 and #subIngredient % 2 == 0 then
+																		for i = 1, #subIngredient, 2 do
+																				if (data.raw.ammo[subIngredient[i]] or data.raw.capsule[subIngredient[i]] or
+																						data.raw.item[subIngredient[i]]) then
+																						table.insert(filteredIngredients, {
+																								type = "item",
+																								name = subIngredient[i],
+																								amount = subIngredient[i + 1]
+																						})
+																						break
+																				end
+																		end
+																end
+														end
+												end
+												if ingredient.type == "fluid" and data.raw.fluid[ingredient.name] then
+														table.insert(filteredIngredients, ingredient)
+												elseif #ingredient == 2 and
+														(data.raw.ammo[ingredient[1]] or data.raw.capsule[ingredient[1]] or
+																data.raw.item[ingredient[1]]) then
+														table.insert(filteredIngredients, {
+																type = "item",
+																name = ingredient[1],
+																amount = ingredient[2]
+														})
+												elseif #ingredient > 2 and #ingredient % 2 == 0 then
+														for i = 1, #ingredient, 2 do
+																if (data.raw.ammo[ingredient[i]] or data.raw.capsule[ingredient[i]] or
+																		data.raw.item[ingredient[i]]) then
+																		table.insert(filteredIngredients, {
+																				type = "item",
+																				name = ingredient[i],
+																				amount = ingredient[i + 1]
+																		})
+																		break
+																end
+														end
+												end
+										elseif type(ingredient) == "string" and
+												(data.raw.ammo[ingredient] or data.raw.capsule[ingredient] or data.raw.item[ingredient]) then
+												table.insert(filteredIngredients, {
+														type = "item",
+														name = ingredient,
+														amount = 1
+												})
+										end
 
-        end
-        recipe.ingredients = filteredIngredients
-      else
-        if (data.raw.ammo[array.ingredient[1]] or data.raw.capsule[array.ingredient[1]] or data.raw.item[array.ingredient[2]]) ~= nil then
-          for i, ingredient in pairs(recipe.ingredients) do
-            if ingredient[1] == array.ingredient[1] then
-              recipe.ingredients[i] = {array.ingredient[2], array.ingredient[3]}
-            end
-          end
-        end
-      end
-    end
-  end
+								end
+								recipe.ingredients = filteredIngredients
+						else
+								if (data.raw.ammo[array.ingredient[1]] or data.raw.capsule[array.ingredient[1]] or
+										data.raw.item[array.ingredient[2]]) ~= nil then
+										for i, ingredient in pairs(recipe.ingredients) do
+												if ingredient[1] == array.ingredient[1] then
+														recipe.ingredients[i] = {
+																type = "item",
+																name = array.ingredient[2],
+																amount = array.ingredient[3]
+														}
+												end
+										end
+								end
+						end
+				end
+		end
 end
 
 
-prometheus_core.setIngredient = function(array)
-  local filteredIngredients = {}
-  for _, ingredient in pairs(array) do
-    if type(ingredient) == "table" then
-      for _, subIngredient in ipairs(ingredient) do
-          if type(subIngredient) == "table" then
-              if subIngredient.type == "fluid" and data.raw.fluid[subIngredient.name] then
-                  table.insert(filteredIngredients, subIngredient)
-                  break
-              elseif #subIngredient == 2 and (data.raw.ammo[subIngredient[1]] or data.raw.capsule[subIngredient[1]] or data.raw.item[subIngredient[1]]) then
-                  table.insert(filteredIngredients, subIngredient)
-                  break
-              elseif #subIngredient > 2 and #subIngredient % 2 == 0 then
-                  for i = 1, #subIngredient, 2 do
-                      if (data.raw.ammo[subIngredient[i]] or data.raw.capsule[subIngredient[i]] or data.raw.item[subIngredient[i]]) then
-                          table.insert(filteredIngredients, {subIngredient[i], subIngredient[i + 1]})
-                          break
-                      end
-                  end
-              end
-          end
-      end
-      if ingredient.type == "fluid" and data.raw.fluid[ingredient.name] then
-        table.insert(filteredIngredients, ingredient)
-      elseif #ingredient == 2 and (data.raw.ammo[ingredient[1]] or data.raw.capsule[ingredient[1]] or data.raw.item[ingredient[1]]) then
-        table.insert(filteredIngredients, ingredient)
-      elseif #ingredient > 2 and #ingredient % 2 == 0 then
-        for i = 1, #ingredient, 2 do
-          if (data.raw.ammo[ingredient[i]] or data.raw.capsule[ingredient[i]] or data.raw.item[ingredient[i]]) then
-            table.insert(filteredIngredients, {ingredient[i], ingredient[i + 1]})
-            break
-          end
-        end
-      end
-    elseif type(ingredient) == "string" and (data.raw.ammo[ingredient] or data.raw.capsule[ingredient] or data.raw.item[ingredient]) then
-      table.insert(filteredIngredients, ingredient)
-    end
 
-  end
-  return filteredIngredients
+prometheus_core.setIngredient = function(array)
+	local filteredIngredients = {}
+	for _, ingredient in pairs(array) do
+		if type(ingredient) == "table" then
+			for _, subIngredient in ipairs(ingredient) do
+					if type(subIngredient) == "table" then
+							if subIngredient.type == "fluid" and data.raw.fluid[subIngredient.name] then
+									table.insert(filteredIngredients, subIngredient)
+									break
+							elseif #subIngredient == 2 and (data.raw.ammo[subIngredient[1]] or data.raw.capsule[subIngredient[1]] or data.raw.item[subIngredient[1]]) then
+									table.insert(filteredIngredients, subIngredient)
+									break
+							elseif #subIngredient > 2 and #subIngredient % 2 == 0 then
+									for i = 1, #subIngredient, 2 do
+											if (data.raw.ammo[subIngredient[i]] or data.raw.capsule[subIngredient[i]] or data.raw.item[subIngredient[i]]) then
+													table.insert(filteredIngredients, {subIngredient[i], subIngredient[i + 1]})
+													break
+											end
+									end
+							end
+					end
+			end
+			if ingredient.type == "fluid" and data.raw.fluid[ingredient.name] then
+				table.insert(filteredIngredients, ingredient)
+			elseif #ingredient == 2 and (data.raw.ammo[ingredient[1]] or data.raw.capsule[ingredient[1]] or data.raw.item[ingredient[1]]) then
+				table.insert(filteredIngredients, ingredient)
+			elseif #ingredient > 2 and #ingredient % 2 == 0 then
+				for i = 1, #ingredient, 2 do
+					if (data.raw.ammo[ingredient[i]] or data.raw.capsule[ingredient[i]] or data.raw.item[ingredient[i]]) then
+						table.insert(filteredIngredients, {ingredient[i], ingredient[i + 1]})
+						break
+					end
+				end
+			end
+		elseif type(ingredient) == "string" and (data.raw.ammo[ingredient] or data.raw.capsule[ingredient] or data.raw.item[ingredient]) then
+			table.insert(filteredIngredients, ingredient)
+		end
+
+	end
+	return filteredIngredients
 end

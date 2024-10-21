@@ -1,7 +1,7 @@
 local PLORD_gl_tank = flib_utils.copy_prototype(data.raw["car"]["tank"], "PLORD_gl_tank")
 PLORD_gl_tank.minable = {mining_time = 0.5, result = "PLORD_gl_tank"}
 PLORD_gl_tank.localised_name = {"entity-name.PLORD_gl_tank"}
-PLORD_gl_tank.guns = { "PLORD_tank_grenade_launcher", "tank-machine-gun", "tank-flamethrower" },
+PLORD_gl_tank.guns = { "PLORD_tank_grenade_launcher", "tank-machine-gun", "tank-flamethrower" }
 
 data:extend({PLORD_gl_tank,
   {
@@ -9,7 +9,6 @@ data:extend({PLORD_gl_tank,
     name = "PLORD_tank_grenade_launcher",
     icon = "__base__/graphics/icons/tank-cannon.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"hidden"},
     subgroup = "gun",
     order = "z[tank]-a[cannon]",
     attack_parameters =
@@ -49,18 +48,19 @@ data:extend({PLORD_gl_tank,
     type = "recipe",
     name = "PLORD_gl_tank",
     localised_name = {"entity-name.PLORD_gl_tank"},
+		icon = "__base__/graphics/icons/tank.png",
     normal =
     {
       enabled = false,
       energy_required = 5,
       ingredients =
       {
-        {"engine-unit", 32},
-        {"steel-plate", 50},
-        {"iron-gear-wheel", 15},
-        {"advanced-circuit", 10}
+        {type = "item", name = "engine-unit", amount = 32},
+        {type = "item", name = "steel-plate", amount = 50},
+        {type = "item", name = "iron-gear-wheel", amount = 15},
+        {type = "item", name = "advanced-circuit", amount = 10}
       },
-      result = "PLORD_gl_tank"
+      results = {{type = "item", name = "PLORD_gl_tank", amount = 1}}
     },
     expensive =
     {
@@ -68,12 +68,12 @@ data:extend({PLORD_gl_tank,
       energy_required = 8,
       ingredients =
       {
-        {"engine-unit", 64},
-        {"steel-plate", 100},
-        {"iron-gear-wheel", 30},
-        {"advanced-circuit", 20}
+        {type = "item", name = "engine-unit", amount = 64},
+        {type = "item", name = "steel-plate", amount = 100},
+        {type = "item", name = "iron-gear-wheel", amount = 30},
+        {type = "item", name = "advanced-circuit", amount = 20}
       },
-      result = "PLORD_gl_tank"
+      results = {{type = "item", name = "PLORD_gl_tank", amount = 1}}
     }
   },
   {

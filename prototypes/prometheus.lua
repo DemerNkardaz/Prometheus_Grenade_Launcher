@@ -204,9 +204,9 @@ prometheus_grenade_types = {
       order = "e-a-a",
       energy_required = 5,
       recipe_ingredients = {
-        {"copper-plate", 10},
-        {"steel-plate", 4},
-        {"coal", 10}
+        {type = "item", name = "copper-plate", amount = 10},
+        {type = "item", name = "steel-plate", amount = 4},
+        {type = "item", name = "coal", amount = 10},
       }
     }
   },
@@ -219,9 +219,9 @@ prometheus_grenade_types = {
       collision_force = "collision_only_enemy",
       energy_required = 15,
       recipe_ingredients = {
-        {"copper-plate", 10},
-        {"steel-plate", 4},
-        {"shotgun-shell", 10}
+        {type = "item", name = "copper-plate", amount = 10},
+        {type = "item", name = "steel-plate", amount = 4},
+        {type = "item", name = "shotgun-shell", amount = 10},
       }
     }
   },
@@ -237,10 +237,10 @@ prometheus_grenade_types = {
       direction_setup = "sentry_eye_setup",
       energy_required = 5,
       recipe_ingredients = {
-        {"PLORD_sentry_eye_entity", 16},
-        {"iron-plate", 6},
-        {"iron-gear-wheel", 2},
-        {"coal", 4}
+        {type = "item", name = "PLORD_sentry_eye_entity", amount = 16},
+        {type = "item", name = "iron-plate", amount = 6},
+        {type = "item", name = "iron-gear-wheel", amount = 2},
+        {type = "item", name = "coal", amount = 4}
       }
     }
   },
@@ -284,9 +284,9 @@ prometheus_grenade_types = {
       collision_force = "collision_only_enemy",
       energy_required = 15,
       recipe_ingredients = {
-        {"copper-plate", 10},
-        {"steel-plate", 8},
-        {"piercing-shotgun-shell", 10}
+        {type = "item", name = "copper-plate", amount = 10},
+        {type = "item", name = "steel-plate", amount = 8},
+        {type = "item", name = "piercing-shotgun-shell", amount = 10}
       }
     }
   },
@@ -300,10 +300,10 @@ prometheus_grenade_types = {
       projectile_glow = true,
       energy_required = 5,
       recipe_ingredients = {
-        {"copper-plate", 10},
-        {"steel-plate", 4},
-        {"coal", 10},
-        {"small-lamp", 1}
+        {type = "item", name = "copper-plate", amount = 10},
+        {type = "item", name = "steel-plate", amount = 4},
+        {type = "item", name = "coal", amount = 10},
+        {type = "item", name = "small-lamp", amount = 1}
       }
     }
   },
@@ -318,8 +318,8 @@ prometheus_grenade_types = {
       projectile_glow = true,
       energy_required = 2,
       recipe_ingredients = {
-        {"iron-plate", 2},
-        {"small-lamp", 1}
+        {type = "item", name = "iron-plate", amount = 2},
+        {type = "item", name = "small-lamp", amount = 1}
       }
     }
   },
@@ -331,9 +331,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 1.25,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 2},
-        {"plastic-bar", 10},
-        {"cliff-explosives", 8}
+        {type = "item", name = "PLORD_40mm_gl", amount = 2},
+        {type = "item", name = "plastic-bar",  amount = 10},
+        {type = "item", name = "cliff-explosives", amount = 8}
       }
     }
   },
@@ -349,9 +349,9 @@ prometheus_grenade_types = {
       collision_force = "collision_only_enemy",
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 2},
-        {"plastic-bar", 10},
-        {"cliff-explosives", 8}
+        {type = "item", name = "PLORD_40mm_gl", amount = 2},
+        {type = "item", name = "plastic-bar", amount = 10},
+        {type = "item", name = "cliff-explosives", amount = 8}
       }
     }
   },
@@ -363,9 +363,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 1.25,
       energy_required = 10,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 5},
-        {"steel-plate", 5},
-        {"explosives", 8}
+        {type = "item", name = "PLORD_40mm_gl", amount = 5},
+        {type = "item", name = "steel-plate", amount = 5},
+        {type = "item", name = "explosives", amount = 8}
       }
     }
   },
@@ -377,9 +377,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 2.0,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl_cluster", 2},
-        {type="fluid", name="crude-oil", amount=40},
-        {"steel-plate", 5}
+        {type = "item", name = "PLORD_40mm_gl_cluster", amount = 2},
+        {type = "fluid", name = "crude-oil", amount = 40},
+        {type = "item", name = "steel-plate", amount = 5}
       },
       category_craft = "crafting-with-fluid"
     }
@@ -392,10 +392,10 @@ prometheus_grenade_types = {
       cooldown_modifier = 1.5,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 1},
-        {"advanced-circuit", 4},
-        {"steel-plate", 5},
-        {"battery", 1}
+        {type = "item", name = "PLORD_40mm_gl", amount = 1},
+        {type = "item", name = "advanced-circuit", amount = 4},
+        {type = "item", name = "steel-plate", amount = 5},
+        {type = "item", name = "battery", amount = 1}
       }
     }
   },
@@ -413,9 +413,9 @@ prometheus_grenade_types = {
       energy_required = 10,
       piercing_damage = 300,
       recipe_ingredients = {
-        {"PLORD_40mm_gl_iron_fist", 1},
-        {"plastic-bar", 12},
-        {"steel-plate", 10}, {"uranium-238", 5}
+        {type = "item", name = "PLORD_40mm_gl_iron_fist", amount = 1},
+        {type = "item", name = "plastic-bar", amount = 12},
+        {type = "item", name = "steel-plate", amount = 10}, {type = "item", name = "uranium-238", amount = 5}
       }
     }
   },
@@ -431,10 +431,10 @@ prometheus_grenade_types = {
       shadow_name = "uranium_frag",
       energy_required = 10,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 2},
-        {"plastic-bar", 10},
-        {"explosives", 8},
-        {"uranium-238", 2}
+        {type = "item", name = "PLORD_40mm_gl", amount = 2},
+        {type = "item", name = "plastic-bar", amount = 10},
+        {type = "item", name = "explosives", amount = 8},
+        {type = "item", name = "uranium-238", amount = 2}
       }
     }
   },
@@ -446,9 +446,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 1.75,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 1},
-        {"poison-capsule", 8},
-        {"steel-plate", 5}
+        {type = "item", name = "PLORD_40mm_gl", amount = 1},
+        {type = "item", name = "poison-capsule", amount = 8},
+        {type = "item", name = "steel-plate", amount = 5}
       }
     }
   },
@@ -460,9 +460,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 2.0,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 1},
-        {"slowdown-capsule", 8},
-        {"steel-plate", 5}
+        {type = "item", name = "PLORD_40mm_gl", amount = 1},
+        {type = "item", name = "slowdown-capsule", amount = 8},
+        {type = "item", name = "steel-plate", amount = 5}
       }
     }
   },
@@ -477,10 +477,10 @@ prometheus_grenade_types = {
       collision_force = "collision_only_enemy",
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 1},
-        {"sulfur", 15},
-        {type="fluid", name="water", amount=10},
-        {"coal", 15}
+        {type = "item", name = "PLORD_40mm_gl", amount = 1},
+        {type = "item", name = "sulfur", amount = 15},
+        {type = "fluid", name = "water", amount = 10},
+        {type = "item", name = "coal", amount = 15}
       },
       category_craft = "chemistry"
     }
@@ -497,10 +497,10 @@ prometheus_grenade_types = {
       shadow_name = "promethium",
       energy_required = 10,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 5},
-        {"steel-plate", 5},
-        {"explosives", 10},
-        {"PLORD_promethium_147", 10}
+        {type = "item", name = "PLORD_40mm_gl", amount = 5},
+        {type = "item", name = "steel-plate", amount = 5},
+        {type = "item", name = "explosives", amount = 10},
+        {type = "item", name = "PLORD_promethium_147", amount = 10}
       }
     }
   },
@@ -512,9 +512,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 1.3,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 2},
-        {type="fluid", name="sulfuric-acid", amount=20},
-        {"PLORD_special_explosives", 1}, {"steel-plate", 5}
+        {type = "item", name = "PLORD_40mm_gl", amount = 2},
+        {type = "fluid", name = "sulfuric-acid", amount = 20},
+        {type = "item", name = "PLORD_special_explosives", amount = 1}, {type = "item", name = "steel-plate", amount = 5}
       },
       category_craft = "crafting-with-fluid"
     }
@@ -531,10 +531,10 @@ prometheus_grenade_types = {
       shadow_name = "plasma_hydroxygen",
       energy_required = 20,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 4},
-        {type="fluid", name="steam", amount=200},
-        {"battery", 20},
-        {"copper-cable", 40}
+        {type = "item", name = "PLORD_40mm_gl", amount = 4},
+        {type = "fluid", name = "steam", amount = 200},
+        {type = "item", name = "battery", amount = 20},
+        {type = "item", name = "copper-cable", amount = 40}
       },
       category_craft = "chemistry"
     }
@@ -551,10 +551,10 @@ prometheus_grenade_types = {
       shadow_name = "plasma_phosphorus",
       energy_required = 20,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 5},
-        {"battery", 20},
-        {"stone", 40},
-        {"coal", 40}
+        {type = "item", name = "PLORD_40mm_gl", amount = 5},
+        {type = "item", name = "battery", amount = 20},
+        {type = "item", name = "stone", amount = 40},
+        {type = "item", name = "coal", amount = 40}
       },
       category_craft = "chemistry"
     }
@@ -571,12 +571,12 @@ prometheus_grenade_types = {
       shadow_name = "plasma_hydrargyrum",
       energy_required = 20,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 5},
-        {"battery", 20},
-        {"stone", 40},
-        {"iron-ore", 10},
-        {type="fluid", name="steam", amount=150},
-        {type="fluid", name="sulfuric-acid", amount=50}
+        {type = "item", name = "PLORD_40mm_gl", amount = 5},
+        {type = "item", name = "battery", amount = 20},
+        {type = "item", name = "stone", amount = 40},
+        {type = "item", name = "iron-ore", amount = 10},
+        {type = "fluid", name = "steam", amount = 150},
+        {type = "fluid", name = "sulfuric-acid", amount = 50}
       },
       category_craft = "chemistry"
     }
@@ -594,10 +594,10 @@ prometheus_grenade_types = {
       projectile_acc = -0.00020,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl_he", 4},
-        {"PLORD_40mm_gl_incendiary", 4},
-        {type="fluid", name="petroleum-gas", amount=50},
-        {type="fluid", name="sulfuric-acid", amount=50}
+        {type = "item", name = "PLORD_40mm_gl_he", amount = 4},
+        {type = "item", name = "PLORD_40mm_gl_incendiary", amount = 4},
+        {type = "fluid", name = "petroleum-gas", amount = 50},
+        {type = "fluid", name = "sulfuric-acid", amount = 50}
       },
       category_craft = "chemistry"
     }
@@ -610,10 +610,10 @@ prometheus_grenade_types = {
       cooldown_modifier = 6.0,
       energy_required = 20,
       recipe_ingredients = {
-        {"PLORD_40mm_gl", 4},
-        {"processing-unit", 10},
-        {"utility-science-pack", 4},
-        {"uranium-fuel-cell", 5}
+        {type = "item", name = "PLORD_40mm_gl", amount = 4},
+        {type = "item", name = "processing-unit", amount = 10},
+        {type = "item", name = "utility-science-pack", amount = 4},
+        {type = "item", name = "uranium-fuel-cell", amount = 5}
       }
     }
   },
@@ -625,9 +625,9 @@ prometheus_grenade_types = {
       cooldown_modifier = 3.75,
       energy_required = 15,
       recipe_ingredients = {
-        {"PLORD_40mm_gl_shock", 1},
-        {"discharge-defense-equipment", 1},
-        {"discharge-defense-remote", 1}
+        {type = "item", name = "PLORD_40mm_gl_shock", amount = 1},
+        {type = "item", name = "discharge-defense-equipment", amount = 1},
+        {type = "item", name = "discharge-defense-remote", amount = 1}
       }
     }
   },
@@ -647,9 +647,9 @@ prometheus_grenade_types = {
       projectile_glow = true,
       energy_required = 50,
       recipe_ingredients = {
-        {"steel-plate", 20},
-        {"plastic-bar", 20},
-        {"PLORD_special_explosives", 10}
+        {type = "item", name = "steel-plate", amount = 20},
+        {type = "item", name = "plastic-bar", amount = 20},
+        {type = "item", name = "PLORD_special_explosives", amount = 10}
       }
     }
   }
@@ -744,8 +744,8 @@ gl_40mm_actions_list = {
             {
               type = "create-entity",
               entity_name = "PLORD_sentry_eye_entity",
-              trigger_created_entity = "true",
-              show_in_tooltip = "true"
+              trigger_created_entity = true,
+              show_in_tooltip = true
             }
           }
         }
@@ -2886,7 +2886,7 @@ gl_40mm_actions_list = {
             tile_name = "nuclear-ground",
             radius = 9,
             apply_projection = true,
-            tile_collision_mask = { "water-tile" }
+            tile_collision_mask = { layers = { water_tile = true } }
           },
           {
             type = "destroy-cliffs",
@@ -3084,7 +3084,7 @@ gl_40mm_actions_list = {
                   {
                     type = "create-entity",
                     entity_name = "nuclear-smouldering-smoke-source",
-                    tile_collision_mask = { "water-tile" }
+                    tile_collision_mask = { layers = { water_tile = true } }
                   }
                 }
               }

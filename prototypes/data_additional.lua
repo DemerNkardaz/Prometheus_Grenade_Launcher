@@ -196,11 +196,14 @@ data:extend({
     energy_required = 20,
     ingredients =
     {
-      {"explosives", 10},
-      {"cliff-explosives", 5},
-      {"plastic-bar", 5},
-      {type="fluid", name="sulfuric-acid", amount=20}
+      {type = "item", name = "explosives", amount = 10},
+      {type = "item", name = "cliff-explosives", amount = 5},
+      {type = "item", name = "plastic-bar", amount = 5},
+      {type = "fluid", name = "sulfuric-acid", amount = 20}
     },
-    result = "PLORD_special_explosives"
+    results =
+    {
+      {type = "item", name = "PLORD_special_explosives", amount = 1}
+    },
   },
 })

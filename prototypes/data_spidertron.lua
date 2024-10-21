@@ -3,7 +3,6 @@ PLORD_spidertron_gl.guns = { "PLORD_spt_glp_1", "PLORD_spt_glp_2", "PLORD_spt_gl
 
 local PLORD_spt_glp_1 = flib_utils.copy_prototype(data.raw["gun"]["PLORD_grenade_launcher_prometheus"], "PLORD_spt_glp_1")
 PLORD_spt_glp_1.localised_name = {"", {"item-name.PLORD_grenade_launcher_prometheus"}}
-PLORD_spt_glp_1.flags = {"hidden"}
 PLORD_spt_glp_1.order = "z[spider]-a[rocket-launcher]"
 PLORD_spt_glp_1.stack_size = 1
 PLORD_spt_glp_1.attack_parameters.cooldown = 30
@@ -44,16 +43,16 @@ PLORD_spt_glp_2, PLORD_spt_glp_3, PLORD_spt_glp_4, PLORD_spidertron_gl,
     energy_required = 10,
     ingredients =
     {
-      {"exoskeleton-equipment", 4},
-      {"fusion-reactor-equipment", 2},
-      {"PLORD_grenade_launcher_prometheus", 4},
-      {"rocket-control-unit", 16},
-      {"low-density-structure", 150},
-      {"radar", 2},
-      {"effectivity-module-3", 2},
-      {"raw-fish", 1}
+			{type = "item", name = "exoskeleton-equipment", amount = 4},
+      {type = "item", name = "fission-reactor-equipment", amount = 2},
+      {type = "item", name = "PLORD_grenade_launcher_prometheus", amount = 4},
+      {type = "item", name = "processing-unit", amount = 16},
+      {type = "item", name = "low-density-structure", amount = 150},
+      {type = "item", name = "radar", amount = 2},
+      {type = "item", name = "efficiency-module-3", amount = 2},
+      {type = "item", name = "raw-fish", amount = 1}
     },
-    result = "PLORD_spidertron_gl"
+    results = {{type = "item", name = "PLORD_spidertron_gl", amount = 1}},
   },
 })
 

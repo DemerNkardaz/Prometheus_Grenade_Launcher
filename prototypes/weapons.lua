@@ -11,6 +11,7 @@ local function initialize_entities()
     this.allow_turning_when_starting_attack = true
     this.call_for_help_radius = 60
     this.shooting_cursor_size = 3.5
+    this.circuit_connector = circuit_connector_definitions["PLORD_gl_40mm_turret"]
     this.folded_animation = anims_package.entity.grenade_turret_wepaonry()
     this.folding_animation = anims_package.entity.grenade_turret_wepaonry()
     this.preparing_animation = anims_package.entity.grenade_turret_wepaonry()
@@ -164,7 +165,7 @@ local function initialize_entities()
     this.circuit_wire_max_distance = nil
     this.collision_box = {{0, 0}, {0, 0}}
     this.selection_box = {{0, 0}, {0, 0}}
-    this.collision_mask = { "resource-layer" }
+    this.collision_mask = { layers = { object = true } }
     this.light = {intensity = 0.7, size = 1, color = {r=0.9, g=0.1, b=0.12}}
     this.light_when_colored = {intensity = 0, size = 6, color = {r=1.0, g=1.0, b=0.2}}
     this.low_size = 2
@@ -217,12 +218,14 @@ data:extend({
     energy_required = 2,
     ingredients =
     {
-      {"electronic-circuit", 2},
-      {"red-wire", 1},
-      {"green-wire", 1}
+      {type = "item", name = "electronic-circuit", amount = 2},
+      {type = "item", name = "red-wire", amount = 1},
+      {type = "item", name = "green-wire", amount = 1}
     },
-    result = "PLORD_sentry_eye_microunit",
-    result_count = 1
+    results =
+    {
+      {type = "item", name = "PLORD_sentry_eye_microunit", amount = 1}
+    },
   },
   {
     type = "item",
@@ -239,12 +242,14 @@ data:extend({
     name = "PLORD_sentry_eye_entity",
     energy_required = 4,
     ingredients = {
-      {"iron-stick", 10},
-      {"copper-cable", 6},
-      {"PLORD_sentry_eye_microunit", 2}
+      {type = "item", name = "iron-stick", amount = 10},
+      {type = "item", name = "copper-cable", amount = 6},
+      {type = "item", name = "PLORD_sentry_eye_microunit", amount = 2}
     },
-    result = "PLORD_sentry_eye_entity",
-    result_count = 1
+    results =
+    {
+      {type = "item", name = "PLORD_sentry_eye_entity", amount = 1}
+    },
   },
 	{
 		type = "gun",
@@ -295,11 +300,14 @@ data:extend({
     energy_required = 10,
     ingredients =
     {
-      {"steel-plate", 5},
-      {"iron-gear-wheel", 10},
-      {"plastic-bar", 20}
+      {type = "item", name = "steel-plate", amount = 5},
+      {type = "item", name = "iron-gear-wheel", amount = 10},
+      {type = "item", name = "plastic-bar", amount = 20}
     },
-    result = "PLORD_grenade_launcher_prometheus"
+    results =
+    {
+      {type = "item", name = "PLORD_grenade_launcher_prometheus", amount = 1}
+    },
   },
   {
     type = "recipe",
@@ -308,11 +316,14 @@ data:extend({
     energy_required = 15,
     ingredients =
     {
-      {"iron-gear-wheel", 20},
-      {"plastic-bar", 20},
-      {"steel-plate", 15},
-      {"engine-unit", 2}
+      {type = "item", name = "iron-gear-wheel", amount = 20},
+      {type = "item", name = "plastic-bar", amount = 20},
+      {type = "item", name = "steel-plate", amount = 15},
+      {type = "item", name = "engine-unit", amount = 2}
     },
-    result = "PLORD_gl_40mm_turret"
+    results =
+    {
+      {type = "item", name = "PLORD_gl_40mm_turret", amount = 1}
+    },
   }
 })

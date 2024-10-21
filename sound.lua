@@ -101,9 +101,9 @@ sounds_package.explosions.shock = function()
 		allow_random_repeat = true,
 		variations = 
 			{
-				{filename = "__base__/sound/fight/robot-selfdestruct-01.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-selfdestruct-02.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
-				{filename = "__base__/sound/fight/robot-selfdestruct-03.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0}
+				{filename = "__base__/sound/fight/robot-selfdestruct-1.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
+				{filename = "__base__/sound/fight/robot-selfdestruct-2.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0},
+				{filename = "__base__/sound/fight/robot-selfdestruct-3.ogg", min_speed = 0.8, max_speed = 1.2, volume = 1.0}
 			}
 	}
 end

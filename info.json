@@ -6,9 +6,9 @@
   "contact": "",
   "homepage": "",
   "description": "Grenade launcher with various ammunition types and available as hand weapon, turret, spidertron, tank and armor equipment.\nSome of all ammunition: Frag, Armor-piercing, Cluster, Acidic, Plasma, Thermobaric, Incendiary, High-Explosive, Plutonium etc.",
-  "factorio_version": "1.1",
+  "factorio_version": "2.0",
   "dependencies": [
-    "base >= 1.1.0",
+    "base >= 2.0.0",
     "flib >= 0.12.4"
   ]
 }

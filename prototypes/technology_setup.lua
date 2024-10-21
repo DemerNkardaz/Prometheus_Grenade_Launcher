@@ -145,7 +145,7 @@ technology_prerequisites = {
     default = {"PLORD_prometheus_gl", "military-3", "explosives"},
   },
   flares = {
-    default = {"PLORD_prometheus_gl", "optics"},
+    default = {"PLORD_prometheus_gl", "lamp"},
   },
   cluster_he = {
     default = {"military-4", "PLORD_prometheus_gl", "cliff-explosives"},

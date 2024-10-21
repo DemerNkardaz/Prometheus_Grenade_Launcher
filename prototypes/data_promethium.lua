@@ -35,7 +35,7 @@ data:extend({
 		energy_required = 12,
 		enabled = false,
 		category = "centrifuging",
-		ingredients = {{"uranium-235", 1}},
+		ingredients = {{type = "item", name = "uranium-235", amount = 1}},
 		icon = prometheus_core.dir .. "graphics/icons/promethium_proccess.png",
 		icon_size = 64, icon_mipmaps = 4,
 		subgroup = "raw-material",
@@ -43,11 +43,13 @@ data:extend({
 		results =
 		{
 			{
+        type = "item",
 				name = "PLORD_promethium_147",
 				probability = 0.15,
 				amount = 4
 			},
 			{
+        type = "item",
 				name = "PLORD_promethium_147",
 				amount = 2
 			},
