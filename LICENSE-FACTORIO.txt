@@ -1,0 +1,29 @@
+Ownership of Factorio Materials
+
+This mod includes or is based on assets from the game Factorio.
+All rights to these assets, including but not limited to graphics,
+sounds, models, and any other intellectual property originally created
+by the Factorio development team, remain the sole property of
+Wube Software Ltd., the creators of Factorio.
+
+No ownership or rights to these materials are transferred or implied
+to the user of this mod, nor to the creator(s) of this mod. All usage
+of Factorio assets is subject to the terms outlined by Wube Software Ltd.
+
+Mod-Specific Content
+
+Any original content created specifically for this mod, which does not
+derive from or include Factorio assets, is the intellectual property
+of the mod creator(s) unless otherwise specified.
+
+Restrictions
+
+	• You may not redistribute or use the Factorio assets from this mod in other
+	  projects or for commercial purposes without permission from Wube Software Ltd.
+	• This mod is distributed for free and must not be sold or otherwise monetized.
+
+Disclaimer
+
+This mod is an independent creation and is not officially associated with
+or supported by Wube Software Ltd. All trademarks and copyrights related
+to Factorio are the property of Wube Software Ltd.
