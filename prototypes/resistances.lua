@@ -6,10 +6,10 @@ prometheus_resistances_table = {
 			ent_class = "small",
 			resistances = {
 					{"plasma", -5, -40},
-					{"overpressure", -5, -50},
+					{"overpressure", -3, -25},
 					{"acid", -2, -60},
 					{"poison", -2, -60},
-					{"radiation", -3, -100}
+					{"radiation", -3, -70}
 				}
 		}
 	},
@@ -19,11 +19,12 @@ prometheus_resistances_table = {
 			ent_name = "biter",
 			ent_class = "medium",
 			resistances = {
-					{"plasma", 2, 12},
-					{"overpressure", -5, -40},
+					{"plasma", 5, -10},
+					{"overpressure", -3, -15},
+					{"overheat", 0, 10},
 					{"acid", -2, -30},
 					{"poison", -2, -30},
-					{"radiation", -3, -70}
+					{"radiation", -3, -50}
 			}
 		}
 	},
@@ -33,14 +34,14 @@ prometheus_resistances_table = {
 			ent_name = "biter",
 			ent_class = "big",
 			resistances = {
-					{"plasma", 2, 12},
-					{"overpressure", -4, -40},
-					{"posttraumatic", 0, 4},
+					{"plasma", 5, 10},
+					{"overpressure", 0, -5},
+					{"posttraumatic", 0, 10},
 					{"overheat", 0, 20},
-					{"fire", 0, 7},
+					{"fire", 0, 10},
 					{"electric", 0, 4},
 					{"acid", -2, -15},
-					{"radiation", -3, -40}
+					{"radiation", -3, -25}
 			}
 		}
 	},
@@ -50,11 +51,11 @@ prometheus_resistances_table = {
 			ent_name = "biter",
 			ent_class = "behemoth",
 			resistances = {
-					{"plasma", 2, 17},
-					{"overpressure", -1, -10},
-					{"posttraumatic", 0, 10},
+					{"plasma", 10, 20},
+					{"overpressure", 0, 10},
+					{"posttraumatic", 0, 25},
 					{"overheat", 0, 50},
-					{"fire", 0, 24},
+					{"fire", 0, 25},
 					{"electric", 2, 10},
 					{"acid", 0, -3},
 					{"radiation", -10, 0}
@@ -67,11 +68,12 @@ prometheus_resistances_table = {
 			ent_name = "spitter",
 			ent_class = "small",
 			resistances = {
-					{"plasma", -5, -70},
-					{"overpressure", -5, -75},
-					{"acid", 2, 5},
-					{"poison", -4, -75},
-					{"radiation", -3, -140}
+					{"plasma", -5, -80},
+					{"overpressure", -5, -80},
+					{"overheat", 0, -35},
+					{"acid", 2, 15},
+					{"poison", -4, -60},
+					{"radiation", -3, -100}
 			}
 		}
 	},
@@ -81,11 +83,12 @@ prometheus_resistances_table = {
 			ent_name = "spitter",
 			ent_class = "medium",
 			resistances = {
-					{"plasma", -4, -40},
-					{"overpressure", -5, -45},
-					{"acid", 4, 10},
+					{"plasma", -4, -55},
+					{"overpressure", -5, -55},
+					{"overheat", 0, -20},
+					{"acid", 4, 25},
 					{"poison", 0, -40},
-					{"radiation", -3, -100}
+					{"radiation", -3, -75}
 			}
 		}
 	},
@@ -95,13 +98,13 @@ prometheus_resistances_table = {
 			ent_name = "spitter",
 			ent_class = "big",
 			resistances = {
-					{"plasma", 0, 10},
-					{"overpressure", -2, -20},
-					{"overheat", 0, 7},
+					{"plasma", 0, -10},
+					{"overpressure", -2, -25},
+					{"overheat", 0, -10},
 					{"fire", 0, 5},
 					{"electric", 0, 4},
-					{"acid", 0, 20},
-					{"radiation", -3, -50}
+					{"acid", 4, 25},
+					{"radiation", -3, -60}
 			}
 		}
 	},
@@ -111,13 +114,13 @@ prometheus_resistances_table = {
 			ent_name = "spitter",
 			ent_class = "behemoth",
 			resistances = {
-					{"plasma", 2, 17},
+					{"plasma", 2, 10},
 					{"overpressure", -2, -10},
-					{"posttraumatic", 0, 5},
-					{"overheat", 0, 50},
-					{"fire", 0, 17},
-					{"electric", 1, 7},
-					{"acid", 0, 40},
+					{"posttraumatic", 0, 10},
+					{"overheat", 0, 15},
+					{"fire", 0, 20},
+					{"electric", 1, 10},
+					{"acid", 4, 40},
 					{"radiation", -10, -30}
 			}
 		}
@@ -514,9 +517,248 @@ prometheus_resistances_table = {
 	}
 }
 
+if (mods["space-age"]) then
+	local space_age_table = {
+		wriggler_pentapods = {
+			{
+				{
+					ent_type = "unit",
+					ent_name = "wriggler",
+					ent_class = "small",
+					resistances = {
+						{"plasma", 0, -66},
+						{"acid", 3, 40},
+						{"poison", 3, 80},
+						{"radiation", 0, -122},
+						{"overpressure", -5, -95},
+						{"overheat", -2, -50},
+						{"posttraumatic", -5, -66},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "unit",
+					ent_name = "wriggler",
+					ent_class = "medium",
+					resistances = {
+						{"plasma", 0, -60},
+						{"acid", 3, 43},
+						{"poison", 3, 86},
+						{"radiation", 0, -100},
+						{"overpressure", -5, -95},
+						{"overheat", -2, -40},
+						{"posttraumatic", -5, -66},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "unit",
+					ent_name = "wriggler",
+					ent_class = "big",
+					resistances = {
+						{"plasma", 0, -44},
+						{"acid", 5, 58},
+						{"poison", 5, 90},
+						{"radiation", 0, -80},
+						{"overpressure", -5, -90},
+						{"overheat", 0, -20},
+						{"posttraumatic", -5, -60},
+					}
+				},
+			},
+		},
+		strafer_pentapods = {
+			{
+				{
+					ent_type = "spider-unit",
+					ent_name = "strafer",
+					ent_class = "small",
+					resistances = {
+						{"plasma", 0, -60},
+						{"acid", 5, 60},
+						{"poison", 5, 90},
+						{"radiation", 0, -60},
+						{"overpressure", -5, -80},
+						{"overheat", -2, -50},
+						{"posttraumatic", -5, -45},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "spider-unit",
+					ent_name = "strafer",
+					ent_class = "medium",
+					resistances = {
+						{"plasma", 0, -40},
+						{"acid", 5, 80},
+						{"poison", 5, 95},
+						{"radiation", 0, -50},
+						{"overpressure", -5, -60},
+						{"overheat", -2, -45},
+						{"posttraumatic", -5, -30},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "spider-unit",
+					ent_name = "strafer",
+					ent_class = "big",
+					resistances = {
+						{"plasma", 0, -33},
+						{"acid", 5, 90},
+						{"poison", 5, 98},
+						{"radiation", 0, -50},
+						{"overpressure", -5, -60},
+						{"overheat", -2, -30},
+						{"posttraumatic", -5, -30},
+					}
+				},
+			},
+		},
+		stomper_pentapods = {
+			{
+				{
+					ent_type = "spider-unit",
+					ent_name = "stomper",
+					ent_class = "small",
+					resistances = {
+						{"plasma", 0, 30},
+						{"acid", 5, 60},
+						{"poison", 5, 60},
+						{"radiation", 0, -90},
+						{"overpressure", 2, 25},
+						{"overheat", 2, 25},
+						{"posttraumatic", 2, 25},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "spider-unit",
+					ent_name = "stomper",
+					ent_class = "medium",
+					resistances = {
+						{"plasma", 0, 50},
+						{"acid", 5, 60},
+						{"poison", 5, 60},
+						{"radiation", 0, -60},
+						{"overpressure", 10, 50},
+						{"overheat", 10, 35},
+						{"posttraumatic", 10, 50},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "spider-unit",
+					ent_name = "stomper",
+					ent_class = "big",
+					resistances = {
+						{"plasma", 0, 70},
+						{"acid", 5, 60},
+						{"poison", 5, 60},
+						{"radiation", 0, -20},
+						{"overpressure", 10, 80},
+						{"overheat", 10, 50},
+						{"posttraumatic", 10, 90},
+					}
+				},
+			},
+		},
+		demolishers = {
+			{
+				{
+					ent_type = "segmented-unit",
+					ent_name = "demolisher",
+					ent_class = "small",
+					resistances = {
+						{"plasma", 0, -80},
+						{"radiation", 0, 100},
+						{"overpressure", 0, 50},
+						{"posttraumatic", 0, 50},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "segmented-unit",
+					ent_name = "demolisher",
+					ent_class = "medium",
+					resistances = {
+						{"plasma", 0, -50},
+						{"radiation", 0, 100},
+						{"overpressure", 0, 70},
+						{"posttraumatic", 0, 70},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "segmented-unit",
+					ent_name = "demolisher",
+					ent_class = "big",
+					resistances = {
+						{"plasma", 0, -30},
+						{"radiation", 0, 100},
+						{"overpressure", 0, 100},
+						{"posttraumatic", 0, 100},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "segment",
+					ent_name = "demolisher",
+					ent_class = "small",
+					resistances = {
+						{"plasma", 0, -80},
+						{"radiation", 0, 100},
+						{"overpressure", 0, 50},
+						{"posttraumatic", 0, 50},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "segment",
+					ent_name = "demolisher",
+					ent_class = "medium",
+					resistances = {
+						{"plasma", 0, -50},
+						{"radiation", 0, 100},
+						{"overpressure", 0, 70},
+						{"posttraumatic", 0, 70},
+					}
+				},
+			},
+			{
+				{
+					ent_type = "segment",
+					ent_name = "demolisher",
+					ent_class = "big",
+					resistances = {
+						{"plasma", 0, -30},
+						{"radiation", 0, 100},
+						{"overpressure", 0, 100},
+						{"posttraumatic", 0, 100},
+					}
+				},
+			},
+		},
+	}
+
+	for _, key in pairs(space_age_table) do
+		for _, resistance_data in ipairs(key) do
+			table.insert(prometheus_resistances_table, resistance_data)
+		end
+	end
+end
 
 if (mods["Rampant"]) then
-
 	local rampants_resistance_data = {
 		acid_biters = {
 			{
@@ -3906,10 +4148,10 @@ if (mods["Rampant"]) then
 			}
 		}
 	}
-for _, key in pairs(rampants_resistance_data) do
+	for _, key in pairs(rampants_resistance_data) do
 		for _, resistance_data in ipairs(key) do
-				table.insert(prometheus_resistances_table, resistance_data)
+			table.insert(prometheus_resistances_table, resistance_data)
 		end
-end
+	end
 end
 

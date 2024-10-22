@@ -1,6 +1,6 @@
 {
   "name": "PLORD_Prometheus_GrenadeLauncher",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "title": "Prometheus Grenade Launcher",
   "author": "Demer Nkardaz",
   "contact": "",
@@ -9,6 +9,7 @@
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.0",
+    "? space-age >= 2.0.0",
     "flib >= 0.12.4"
   ]
 }

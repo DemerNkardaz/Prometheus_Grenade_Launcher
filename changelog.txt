@@ -1,4 +1,14 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.2.7
+Date: 2024-10-22
+  Features:
+    - Added damage types resistances to new enemies from Space Age.
+    - Wrigglers now weak to Overpressure, Post Traumatic, Overheat, Radiation and some resisted to Acid, Poison. Strafers have same resistances.
+    - Stompers now weak to Radiation and some resisted to Plasma, Acid, Poison, Overpressure, Overheat and Post Traumatic.
+    - Demolishers now weak to Plasma and some resisted to Radiation (100%), Overpressure and Post Traumatic.
+  Changes:
+    - Default biters resistances little rebalanced.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.6
 Date: 2024-10-21
   Bugs:
