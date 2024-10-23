@@ -43,36 +43,46 @@ sentryEye_observeRadius = 30
 local function sentryEye_enemyObserver(event, sentry_name)
 		local tick = event.tick
 		if tick % 250 == 0 then
-				local surface = game.get_surface(1)
-				local entities = surface.find_entities_filtered{ name = sentry_name }
-				local sentryCoordinates = {}
 
+				local entities = {}
+				for _, surface in pairs(game.surfaces) do
+						local surface_entities = surface.find_entities_filtered {
+								name = sentry_name
+						}
+						for _, entity in pairs(surface_entities) do
+								table.insert(entities, entity)
+						end
+				end
+
+				local sentryCoordinates = {}
 				for _, entity in pairs(entities) do
 						if entity and entity.valid then
 								local unit_number = entity.unit_number
 								local entity_name = entity.backer_name or sentry_name
-								local sentry_position = { x = entity.position.x, y = entity.position.y }
+								local sentry_position = {
+										x = entity.position.x,
+										y = entity.position.y
+								}
 								local radius = sentryEye_observeRadius
 
 								local intersect = false
 								for _, coords in pairs(sentryCoordinates) do
-										if math.abs(sentry_position.x - coords.x) < radius and math.abs(sentry_position.y - coords.y) < radius then
+										if math.abs(sentry_position.x - coords.x) < radius and math.abs(sentry_position.y - coords.y) <
+												radius then
 												intersect = true
 												break
 										end
 								end
-									
+
 								if not intersect then
 										table.insert(sentryCoordinates, sentry_position)
 
-										local enemies = entity.surface.find_entities_filtered{
+										local enemies = entity.surface.find_entities_filtered {
 												position = entity.position,
 												radius = radius,
 												force = "enemy"
 										}
 										if #enemies > 0 then
-
-
 												sentryCooldown = sentryCooldown or {}
 												sentryCooldown[entity_name] = sentryCooldown[entity_name] or 0
 
@@ -82,19 +92,26 @@ local function sentryEye_enemyObserver(event, sentry_name)
 														local enemyCount = #enemies
 														local message = {}
 														if enemyCount == 1 then
-															message = string.format("[gps=%d, %d][img=item.PLORD_sentry_eye_entity] Observer [color=green]%s[/color] has detected approaching of [color=red]%d[/color] enemy.",
-														entity.position.x, entity.position.y, entity_name, enemyCount)
+																message = string.format(
+																		"[gps=%d,%d,%s][img=item.PLORD_sentry_eye_entity] Observer [color=green]%s[/color] has detected approaching of [color=red]%d[/color] enemy.",
+																		entity.position.x, entity.position.y, entity.surface.name, entity_name, enemyCount)
 														else
-															message = string.format("[gps=%d, %d][img=item.PLORD_sentry_eye_entity] Observer [color=green]%s[/color] has detected approaching of [color=red]%d[/color] enemies.",
-														entity.position.x, entity.position.y, entity_name, enemyCount)
+																message = string.format(
+																		"[gps=%d,%d,%s][img=item.PLORD_sentry_eye_entity] Observer [color=green]%s[/color] has detected approaching of [color=red]%d[/color] enemies.",
+																		entity.position.x, entity.position.y, entity.surface.name, entity_name, enemyCount)
 														end
 														game.print(message)
-														local warning_message = string.format("[font=default-bold][color=yellow]⚠️[/color][/font]")
-														rendering.draw_text{
+														local warning_message = string.format(
+																"[font=default-bold][color=yellow]⚠️[/color][/font]")
+														rendering.draw_text {
 																text = warning_message,
-																surface = surface,
+																surface = entity.surface,
 																target = entity,
-																color = {r=1, g=0, b=0},
+																color = {
+																		r = 1,
+																		g = 0,
+																		b = 0
+																},
 																scale = 1,
 																time_to_live = 300,
 																alignment = "center",
@@ -219,7 +236,15 @@ local function event_register()
 			})
 			local entity = event.created_entity or event.entity
 			local surface = entity.surface
-			if entity.name == "PLORD_sentry_eye_entity" and surface.get_tile(entity.position.x, entity.position.y).name == "out-of-map" then
+			local forbidden_tiles = {
+				["out-of-map"] = true,
+				["lava-hot"] = true,
+				["lava"] = true,
+				["empty-space"] = true
+			}
+			local tile_name = surface.get_tile(entity.position.x, entity.position.y).name
+
+			if entity.name == "PLORD_sentry_eye_entity" and forbidden_tiles[tile_name] then
 					entity.die()
 			end
 	end)

@@ -10,7 +10,7 @@ data:extend({
 				{
 					size = 64,
 					filename = prometheus_core.dir .. "graphics/icons/promethium-147.png",
-					scale = 0.25,
+					scale = 0.5,
 					mipmap_count = 4
 				},
 				{
@@ -18,16 +18,20 @@ data:extend({
 					blend_mode = "normal",
 					size = 64,
 					filename = prometheus_core.dir .. "graphics/icons/promethium-147_glow.png",
-					scale = 0.25,
+					scale = 0.5,
 					tint = {r = 1, g = 1, b = 1, a = 1},
 					mipmap_count = 4
 				}
 			}
 		},
-		icon_size = 64, icon_mipmaps = 4,
+		icon_size = 64, 
 		subgroup = "intermediate-product",
 		order = "r[promethium-147]",
-		stack_size = 100
+    inventory_move_sound = item_sounds.nuclear_inventory_move,
+    pick_sound = item_sounds.nuclear_inventory_pickup,
+    drop_sound = item_sounds.nuclear_inventory_move,
+		stack_size = 100,
+    weight = 20*kg
 	},
 	{
 		type = "recipe",
@@ -37,19 +41,19 @@ data:extend({
 		category = "centrifuging",
 		ingredients = {{type = "item", name = "uranium-235", amount = 1}},
 		icon = prometheus_core.dir .. "graphics/icons/promethium_proccess.png",
-		icon_size = 64, icon_mipmaps = 4,
+		icon_size = 64, 
 		subgroup = "raw-material",
 		order = "k[promethium-processing]",
 		results =
 		{
 			{
-        type = "item",
+				type = "item",
 				name = "PLORD_promethium_147",
 				probability = 0.15,
 				amount = 4
 			},
 			{
-        type = "item",
+				type = "item",
 				name = "PLORD_promethium_147",
 				amount = 2
 			},

@@ -1,4 +1,24 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2024-10-23
+  Changes:
+    - Promethium-147 color changed to red like Promethium Asteroids from Space Age.
+    - Space Age Promethium Asteroid Chunk now can be recycled to Promethium-147. Just pull chunk to Recycler and get 10 Promethium-147 with 50% chance (or more with lower chance).
+---------------------------------------------------------------------------------------------------
+Version: 0.2.9
+Date: 2024-10-22
+  Bugs:
+    - Another minor fixes in founded problems.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.8
+Date: 2024-10-22
+  Changes:
+    - “Sentry Eye” time to scan nearby radius increased in 1.5 times.
+  Bugs:
+    - Fixed Stasis sticker’s sprite.
+    - Fixed “Sentry Eye” can’t detect enemies on non-Nauvis planets.
+    - Fixed “Shoulder Grenade Launcher” can’t be equipped.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.7
 Date: 2024-10-22
   Features:

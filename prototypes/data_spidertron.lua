@@ -3,6 +3,7 @@ PLORD_spidertron_gl.guns = { "PLORD_spt_glp_1", "PLORD_spt_glp_2", "PLORD_spt_gl
 
 local PLORD_spt_glp_1 = flib_utils.copy_prototype(data.raw["gun"]["PLORD_grenade_launcher_prometheus"], "PLORD_spt_glp_1")
 PLORD_spt_glp_1.localised_name = {"", {"item-name.PLORD_grenade_launcher_prometheus"}}
+PLORD_spt_glp_1.hidden = true
 PLORD_spt_glp_1.order = "z[spider]-a[rocket-launcher]"
 PLORD_spt_glp_1.stack_size = 1
 PLORD_spt_glp_1.attack_parameters.cooldown = 30
@@ -30,7 +31,7 @@ PLORD_spt_glp_2, PLORD_spt_glp_3, PLORD_spt_glp_4, PLORD_spidertron_gl,
     icon = "__base__/graphics/icons/spidertron.png",
     icon_tintable = "__base__/graphics/icons/spidertron-tintable.png",
     icon_tintable_mask = "__base__/graphics/icons/spidertron-tintable-mask.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64, 
     subgroup = "PLORD_heavy_weapons",
     order = "z",
     place_result="PLORD_spidertron_gl",

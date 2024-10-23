@@ -168,7 +168,7 @@ prometheus_core.create_40mm_ammo = function(array)
 						localised_description = {"item-description.PLORD_40mm_gl" .. dash .. (clone_name or "")},
 						icon = prometheus_core.dir .. "graphics/icons/weapons/40mm_gl" .. dash .. (clone_name or "") .. ".png",
 						icon_size = 128,
-						icon_mipmaps = 4,
+						
 						magazine_size = magazine or 16,
 						subgroup = subgroup or "PLORD_heavy_weapons_gl_ammo",
 						order = order or nil,
@@ -247,13 +247,13 @@ cyrus_core.generate_icon_tech = function(path_type, name, size)
 	{
 		{
 			icon = path_type .. name .. ".png",
-			icon_size = size, icon_mipmaps = 4,
+			icon_size = size or 256, 
 		},
 		{
 			icon = "__core__/graphics/icons/technology/constants/constant-equipment.png",
 			icon_size = 128,
-			icon_mipmaps = 3,
-			shift = {100, 100}
+			scale = 0.5,
+			shift = {50, 50}
 		}
 	}
 end
@@ -314,42 +314,54 @@ cyrus_core.create_cyrus_launcher = function(array)
 		type = "active-defense-equipment",
 		name = "PLORD_personal_shoulder_gl40mm" .. dash .. (name or ""),
 		sprite = cyrus_core.generate_sprite("equip_gl" .. dash .. (name or "_frag"), 128, 0.5 * 1.25),
-		shape = {width = 2, height = 2, type = "full"},
-		energy_source = {type = "electric", usage_priority = "secondary-input", buffer_capacity = buffer_capacity or "500kJ"},
-		turret_base_has_direction = true,
+		shape = 
+		{
+			width = 2,
+			height = 2,
+			type = "full"
+		},
+		energy_source =
+		{
+			type = "electric",
+			usage_priority = "secondary-input",
+			buffer_capacity = buffer_capacity or "500kJ"
+		},
+
 		attack_parameters =
 		{
 			type = "projectile",
 			projectile_center = {0.083, 0},
 			projectile_creation_distance = 0.5,
-			--lead_target_for_projectile_speed = 0.5* 0.95,
 			cooldown = cooldown or 200,
 			range = range or 50,
 			min_range = min_range or 30,
-			turn_range = 1.0 / 5.0,
 			damage_modifier = damage_modifier or 1.25,
 			sound = gun_sounds or prometheus_core.shot_sound(),
 			ammo_category = "PLORD_40mm_grenade_ammo",
 			ammo_type =
 			{
-				category = "PLORD_40mm_grenade_ammo",
 				energy_consumption = energy_consumption or "570kJ",
 				action = action or data.raw["ammo"]["PLORD_40mm_gl" .. dash .. (array.name or "")].ammo_type.action,
 			}
 		},
+		
 		automatic = true,
-		categories = {"armor"}
+    categories = {"armor"}
 		},
 		{
 			type = "item",
 			name = "PLORD_personal_shoulder_gl40mm" .. dash .. (name or ""),
-			icons = cyrus_core.generate_icon(prometheus_core.weapon_icons, 	"equip_gl" .. dash .. (name or "_frag"), 128),
-			pictures = cyrus_core.generate_picture(prometheus_core.weapon_icons, 	"equip_gl" .. dash .. (name or "_frag"), 128, 0.17),
-			placed_as_equipment_result = "PLORD_personal_shoulder_gl40mm" .. dash .. 	(name or ""),
+			icons = cyrus_core.generate_icon(prometheus_core.weapon_icons, "equip_gl" .. dash .. (name or "_frag"), 128),
+			pictures = cyrus_core.generate_picture(prometheus_core.weapon_icons, "equip_gl" .. dash .. (name or "_frag"), 128, 0.17),
+			place_as_equipment_result = "PLORD_personal_shoulder_gl40mm" .. dash .. (name or ""),
 			subgroup = "PLORD_heavy_weapons_gl_equip",
 			order = order,
 			default_request_amount = 5,
-			stack_size = 20
+			inventory_move_sound = item_sounds.turret_inventory_move,
+			pick_sound = item_sounds.turret_inventory_pickup,
+			drop_sound = item_sounds.turret_inventory_move,
+			stack_size = 20,
+			weight = 180*kg
 		},
 		{
 			type = "recipe",
@@ -370,7 +382,7 @@ cyrus_core.create_cyrus_launcher = function(array)
 	data:extend({{
 			type = "technology",
 			name = "PLORD_personal_shoulder_gl40mm" .. dash .. (name or ""),
-			icons = cyrus_core.generate_icon_tech(prometheus_core.technologies_icons, 	"tech_equip_gl" .. dash .. (name or "_frag"), 256),
+			icons = cyrus_core.generate_icon_tech(prometheus_core.technologies_icons, "tech_equip_gl" .. dash .. (name or "_frag")),
 			localised_description = array.localised_description or {"", {"technology-description.personal-laser-defense-equipment"}},
 			prerequisites = requirenments,
 			effects =

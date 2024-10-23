@@ -37,11 +37,13 @@ require ("prototypes/data_promethium")
 
 require("prototypes/technology_setup")
 
+require("prototypes/space_age_extras")
+
 if mods["space-exploration"] then
   table.insert(se_prodecural_tech_exclusions, "PLORD_")
 end
 
-
+maximum_lifetime = 4960854000
 
 local function initialize_explosions()
 	local high_explosive_grenade_explosion = function()
@@ -227,6 +229,7 @@ local function initialize_explosions()
 				name = "PLORD_inferno_explosion",
 				localised_name = {"entity-name.artillery-cannon-muzzle-flash"},
 				flags = {"not-on-map"},
+				hidden = true,
 				subgroup = "explosions",
 				animations = anims_package.explosions.inferno(),
 				rotate = true,
@@ -643,6 +646,7 @@ data:extend({
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
 		flags = {"not-on-map"},
+		hidden = true,
 		subgroup = "explosions",
 		animations = 
 		{
@@ -673,6 +677,7 @@ data:extend({
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
 		flags = {"not-on-map"},
+		hidden = true,
 		subgroup = "explosions",
 		animations = 
 		{
@@ -765,6 +770,7 @@ data:extend({
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
 		flags = {"not-on-map"},
+		hidden = true,
 		subgroup = "explosions",
 		animations =
 		{
@@ -811,6 +817,7 @@ data:extend({
 		icon = "__base__/graphics/item-group/effects.png",
 		icon_size = 64,
 		flags = {"not-on-map"},
+		hidden = true,
 		subgroup = "explosions",
 		animations =
 		{
@@ -845,30 +852,16 @@ data:extend({
 		name = "PLORD_stasis_stun_sticker",
 		animation =
 		{
-			filename = "__base__/graphics/entity/acid-sticker/acid-sticker.png",
-			draw_as_glow = true,
-			priority = "extra-high",
-			line_length = 5,
-			width = 16,
-			height = 18,
-			frame_count = 50,
-			animation_speed = 1,
+      filename = "__base__/graphics/entity/acid-sticker/acid-sticker.png",
+      draw_as_glow = true,
+      line_length = 5,
+      width = 30,
+      height = 34,
+      frame_count = 50,
+      animation_speed = 1,
+      shift = util.by_pixel(1.5, 0),
+      scale = 2 * 0.5,
 			tint = {r=0.25, g=0.94, b=0.84, a = 0.25},
-			scale = 2,
-			shift = util.by_pixel (2,0),
-			hr_version =
-			{
-				filename = "__base__/graphics/entity/acid-sticker/hr-acid-sticker.png",
-				draw_as_glow = true,
-				line_length = 5,
-				width = 30,
-				height = 34,
-				frame_count = 50,
-				animation_speed = 1,
-				tint = {r=0.25, g=0.94, b=0.84, a = 0.25},
-				shift = util.by_pixel(1.5, 0),
-				scale = 2 * 0.5
-			}
 		},
 		duration_in_ticks = 15 * 60,
 		target_movement_modifier = 0
@@ -900,6 +893,7 @@ data:extend({
 			scale = 0,
 		},
 		flags = {"not-on-map"},
+		hidden = true,
 		subgroup = "explosions",
 		sound = {
 			aggregation = {max_count = 3, remove = true},
@@ -1030,6 +1024,7 @@ data:extend({
 			}
 		},
 		flags = {"not-on-map"},
+		hidden = true,
 		subgroup = "explosions",
 	},
 	{
@@ -1229,7 +1224,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_prometheus_gl",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/prometheus.png",
 		effects =
 		{
@@ -1267,7 +1262,7 @@ data:extend({
 		type = "technology",
 		name = "PLORD_grenade_turret",
 		localised_name = {"", {"item-name.PLORD_gl_40mm_turret"}},
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/gl_turret.png",
 		effects =
 		{
@@ -1288,7 +1283,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_flares",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_flares.png",
 		effects =
 		{
@@ -1313,7 +1308,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_cluster_he",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_cluster_he.png",
 		effects =
 		{
@@ -1338,7 +1333,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_pellets_piercing",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_pellets_piercing.png",
 		effects =
 		{
@@ -1359,7 +1354,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_incendiary",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_incendiary.png",
 		effects =
 		{
@@ -1380,7 +1375,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_gl_uranium_fist",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_uranium_fist.png",
 		effects =
 		{
@@ -1401,7 +1396,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_gl_uranium_frag",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_uranium_frag.png",
 		effects =
 		{
@@ -1422,7 +1417,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_gl_promethium",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_promethium.png",
 		effects =
 		{
@@ -1443,7 +1438,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_shock",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_shock.png",
 		effects =
 		{
@@ -1464,7 +1459,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_bio_chemicals",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_bio_chemicals.png",
 		effects =
 		{
@@ -1497,7 +1492,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_thermobaric",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_thermobaric.png",
 		effects =
 		{
@@ -1518,7 +1513,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_newphysics",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_newphysics.png",
 		effects =
 		{
@@ -1547,7 +1542,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_plasma_phosphor",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_plasma_phosphor.png",
 		effects =
 		{
@@ -1568,7 +1563,7 @@ data:extend({
 	{
 		type = "technology",
 		name = "PLORD_40mm_plasma_mercury",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/40mm_plasma_mercury.png",
 		effects =
 		{
@@ -1616,14 +1611,14 @@ data:extend({
 		name = "dummy_item_pluto239",
 		subgroup = "other",
 		icon = prometheus_core.dir .. "graphics/icons/plutonium-239.png",
-		icon_size = 64, icon_mipmaps = 4, stack_size = 1
+		icon_size = 64,  stack_size = 1
 	},
 	{
 		type = "item",
 		name = "dummy_item_pluto240",
 		subgroup = "other",
 		icon = prometheus_core.dir .. "graphics/icons/plutonium-240.png",
-		icon_size = 64, icon_mipmaps = 4, stack_size = 1
+		icon_size = 64,  stack_size = 1
 	},
 })
 local function make_gl_pluto_tech(name, icon, effects, prerequisites)
@@ -1631,7 +1626,7 @@ local function make_gl_pluto_tech(name, icon, effects, prerequisites)
 	{
 		type = "technology",
 		name = name or "PLORD_40mm_pluto",
-		icon_size = 256, icon_mipmaps = 4,
+		icon_size = 256, 
 		icon = prometheus_core.dir .. "graphics/technology/" .. icon .. ".png",
 		effects = effects or {{type = "unlock-recipe", recipe = "PLORD_40mm_gl_pluto"}},
 		prerequisites = prerequisites or technology_prerequisites.pluto,
@@ -1650,12 +1645,8 @@ if settings.startup["PLORD_pluto_grenade"].value and not (mods["PlutoniumEnergy"
 		data:extend({ make_gl_pluto_tech("PLORD_40mm_pluto", "40mm_pluto239_2", effects, prerequisites) })
 		else data:extend({ make_gl_pluto_tech("PLORD_40mm_pluto", "40mm_pluto239", effects, prerequisites) })
 	end
-	table.insert(data.raw["recipe"]["PLORD_40mm_gl_pluto"].ingredients, {"uranium-235", 30})
 end
 
-if (mods["PlutoniumEnergy"]) or (mods["EnchantedNuclearPort"]) then
-	table.insert(data.raw["recipe"]["PLORD_40mm_gl_pluto"].ingredients, {"plutonium-239", 20})
-end
 if (mods["PlutoniumEnergy"]) then 
 	data:extend({ make_gl_pluto_tech("PLORD_40mm_pluto", "40mm_pluto239", effects, {"military-4", "kovarex-enrichment-process", "plutonium-processing", "PLORD_40mm_bio_chemicals"}) })
 elseif (mods["EnchantedNuclearPort"]) then 

@@ -153,7 +153,7 @@ data:extend({
     type = "capsule",
     name = "PLORD_special_explosives",
     icon = prometheus_core.dir .. "graphics/icons/special_explosives.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64, 
     flags = {"hide-from-bonus-gui"},
     capsule_action =
     {
