@@ -220,11 +220,11 @@ data:extend({
 		type = "recipe",
 		name = "PLORD_sentry_eye_microunit",
 		energy_required = 2,
+		enabled = false,
 		ingredients =
 		{
 			{type = "item", name = "electronic-circuit", amount = 2},
-			{type = "item", name = "red-wire", amount = 1},
-			{type = "item", name = "green-wire", amount = 1}
+			{type = "item", name = "copper-cable", amount = 2}
 		},
 		results =
 		{
@@ -244,6 +244,7 @@ data:extend({
 	{
 		type = "recipe",
 		name = "PLORD_sentry_eye_entity",
+		enabled = false,
 		energy_required = 4,
 		ingredients = {
 			{type = "item", name = "iron-stick", amount = 10},

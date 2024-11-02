@@ -150,40 +150,10 @@ data:extend({
   },
 
   {
-    type = "capsule",
+    type = "item",
     name = "PLORD_special_explosives",
     icon = prometheus_core.dir .. "graphics/icons/special_explosives.png",
-    icon_size = 64, 
-    flags = {"hide-from-bonus-gui"},
-    capsule_action =
-    {
-      type = "throw",
-      attack_parameters =
-      {
-        type = "projectile",
-        activation_type = "throw",
-        ammo_category = "grenade",
-        cooldown = 30,
-        projectile_creation_distance = 0.6,
-        range = 20,
-        ammo_type =
-        {
-          category = "grenade",
-          target_type = "position",
-          action =
-          {
-            type = "direct",
-            action_delivery =
-            {
-              type = "projectile",
-              projectile = "PLORD_special_explosives",
-              starting_speed = 0.3
-            },
-
-          }
-        }
-      }
-    },
+    icon_size = 64,
     subgroup = "raw-material",
     order = "j[special-explosives]",
     stack_size = 20
@@ -196,10 +166,9 @@ data:extend({
     energy_required = 20,
     ingredients =
     {
-      {type = "item", name = "explosives", amount = 10},
-      {type = "item", name = "cliff-explosives", amount = 5},
+      {type = "item", name = "explosives", amount = 12},
       {type = "item", name = "plastic-bar", amount = 5},
-      {type = "fluid", name = "sulfuric-acid", amount = 20}
+      {type = "fluid", name = "sulfuric-acid", amount = 30}
     },
     results =
     {

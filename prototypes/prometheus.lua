@@ -333,7 +333,7 @@ prometheus_grenade_types = {
       recipe_ingredients = {
         {type = "item", name = "PLORD_40mm_gl", amount = 2},
         {type = "item", name = "plastic-bar",  amount = 10},
-        {type = "item", name = "cliff-explosives", amount = 8}
+        {type = "item", name = "explosives", amount = 8}
       }
     }
   },
@@ -351,7 +351,7 @@ prometheus_grenade_types = {
       recipe_ingredients = {
         {type = "item", name = "PLORD_40mm_gl", amount = 2},
         {type = "item", name = "plastic-bar", amount = 10},
-        {type = "item", name = "cliff-explosives", amount = 8}
+        {type = "item", name = "explosives", amount = 8}
       }
     }
   },

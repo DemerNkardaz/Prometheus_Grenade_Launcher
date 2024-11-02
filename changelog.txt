@@ -1,4 +1,20 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.3.2
+Date: 2024-11-02
+  Changes:
+    - “Special Explosives” recipe “Cliff Explosives” removed, “Explosives” increased 10 → 12, “Sulfuric Acid” increased 20 → 30.
+    - “High Explosive” grenades recipe “Cliff Explosives” changed to “Explosives”.
+    - Mod’s Technologies which requires “Cliff Explosives” technology now require “Explosives” technology instead.
+    - Removed “Special Explosives” ability to destroy cliffs.
+    - Recipe to get promethium-147 from asteroid chunks moved from recycling to centrufing.
+    - Promethium-147 half-life decreased from 1800 to 72 hours… 1800 too big for 120hz/ups and more.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.1
+Date: 2024-11-01
+  Bugs:
+    - “Scan Logic Microprocessor” & “Sentry Eye” recipes, fixed of enable before technology research.
+    - “Scan Logic Microprocessor” recipe “Red” & “Green” wires changed to “Copper Cable”×2
+---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 2024-10-23
   Changes:

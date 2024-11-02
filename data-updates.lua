@@ -30,8 +30,9 @@ local replacments = {
 			ingredients = 
 			{
 				{"electronic-circuit", 2},
-				{"graphite", 2, "red-wire", 1},
-				{"silicon", 2, "green-wire", 1}
+				{"graphite", 2},
+				{"silicon", 2},
+				{"copper-cable", 2}
 			}
 		}
 	},
@@ -131,7 +132,7 @@ local replacments = {
 			{
 				{"PLORD_40mm_gl", 2},
 				{"plastic-bar", 10},
-				{"cliff-explosives", 8}
+				{"explosives", 8}
 			}
 		}
 	},
@@ -142,7 +143,7 @@ local replacments = {
 			{
 				{"PLORD_40mm_gl", 2},
 				{"plastic-bar", 10},
-				{"cliff-explosives", 8}
+				{"explosives", 8}
 			}
 		}
 	},

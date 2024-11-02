@@ -148,10 +148,10 @@ technology_prerequisites = {
     default = {"PLORD_prometheus_gl", "lamp"},
   },
   cluster_he = {
-    default = {"military-4", "PLORD_prometheus_gl", "cliff-explosives"},
+    default = {"military-4", "PLORD_prometheus_gl", "explosives"},
   },
   pellets_piercing = {
-    default = {"military-4", "PLORD_prometheus_gl", "cliff-explosives"},
+    default = {"military-4", "PLORD_prometheus_gl", "explosives"},
   },
   incendiary = {
     default = {"military-4", "PLORD_grenade_turret", "PLORD_40mm_cluster_he"},

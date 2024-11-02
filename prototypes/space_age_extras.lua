@@ -1,5 +1,5 @@
 if (mods["space-age"]) then
-	data.raw["item"]["PLORD_promethium_147"].spoil_ticks = 18000 * hour
+	data.raw["item"]["PLORD_promethium_147"].spoil_ticks = 72 * hour
 
 	data:extend({
 		{
@@ -11,7 +11,7 @@ if (mods["space-age"]) then
 			auto_recycle = false,
 			icon = prometheus_core.dir .. "graphics/icons/promethium-147.png",
 			icon_size = 64, 
-			category = "recycling",
+			category = "centrifuging",
 			subgroup = "raw-material",
 			order = "k[promethium-processing]-b[asteroid-promethium]",
 			ingredients = {
