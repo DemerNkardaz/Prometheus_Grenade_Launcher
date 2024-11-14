@@ -627,7 +627,7 @@ prometheus_grenade_types = {
       recipe_ingredients = {
         {type = "item", name = "PLORD_40mm_gl_shock", amount = 1},
         {type = "item", name = "discharge-defense-equipment", amount = 1},
-        {type = "item", name = "discharge-defense-remote", amount = 1}
+        {type = "item", name = "battery", amount = 3}
       }
     }
   },
@@ -2799,7 +2799,7 @@ gl_40mm_actions_list = {
   discharge =
     {
       {
-        type = "instant",
+        --type = "instant",
         action_delivery = 
         {
           {

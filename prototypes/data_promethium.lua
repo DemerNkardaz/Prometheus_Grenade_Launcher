@@ -1,3 +1,5 @@
+local item_sounds = require("__base__.prototypes.item_sounds")
+
 data:extend({
 	{
 		type = "item",
@@ -27,11 +29,11 @@ data:extend({
 		icon_size = 64, 
 		subgroup = "intermediate-product",
 		order = "r[promethium-147]",
-    inventory_move_sound = item_sounds.nuclear_inventory_move,
-    pick_sound = item_sounds.nuclear_inventory_pickup,
-    drop_sound = item_sounds.nuclear_inventory_move,
+		inventory_move_sound = item_sounds.nuclear_inventory_move,
+		pick_sound = item_sounds.nuclear_inventory_pickup,
+		drop_sound = item_sounds.nuclear_inventory_move,
 		stack_size = 100,
-    weight = 20*kg
+		weight = 20*kg
 	},
 	{
 		type = "recipe",

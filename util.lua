@@ -1,3 +1,5 @@
+local item_sounds = require("__base__.prototypes.item_sounds")
+
 prometheus_core.generateFuncCallFromArray = function(func, func_source)
 		local func = func
 		local func_source = func_source

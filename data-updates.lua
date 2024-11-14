@@ -333,7 +333,7 @@ local replacments = {
 			{
 				{"PLORD_40mm_gl_shock", 1},
 				{"discharge-defense-equipment", 1},
-				{"discharge-defense-remote", 1}
+				{"battery", 3}
 			}
 		}
 	},

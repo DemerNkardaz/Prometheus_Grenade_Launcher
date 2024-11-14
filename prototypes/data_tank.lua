@@ -1,3 +1,5 @@
+local item_sounds = require("__base__.prototypes.item_sounds")
+
 local PLORD_gl_tank = flib_utils.copy_prototype(data.raw["car"]["tank"], "PLORD_gl_tank")
 PLORD_gl_tank.minable = {mining_time = 0.5, result = "PLORD_gl_tank"}
 PLORD_gl_tank.localised_name = {"entity-name.PLORD_gl_tank"}
