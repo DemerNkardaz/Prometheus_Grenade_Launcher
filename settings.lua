@@ -43,4 +43,20 @@ data:extend({
 		default_value = false,
 		order = "a-a-b"
 	},
+	{
+		type = "double-setting",
+		name = "PLORD_sentry_eye_scan_interval",
+		setting_type = "runtime-global",
+		default_value = 2.0,
+		minimum_value = 0.0,
+		order = "a-a-c"
+	},
+	{
+		type = "int-setting",
+		name = "PLORD_sentry_eye_scan_tick",
+		setting_type = "runtime-global",
+		default_value = 250,
+		minimum_value = 100,
+		order = "a-a-d"
+	},
 })

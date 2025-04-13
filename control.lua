@@ -39,30 +39,16 @@ local function triggerEntity_children_event(event, type, parent, children)
 end
 
 sentryEye_observeRadius = 30
+sentryEyes = {}
 
-local function sentryEye_enemyObserver(event, sentry_name)
+local function sentryEye_enemyObserver(event)
 		local tick = event.tick
-		if tick % 250 == 0 then
-
-				local entities = {}
-				for _, surface in pairs(game.surfaces) do
-						local surface_entities = surface.find_entities_filtered {
-								name = sentry_name
-						}
-						for _, entity in pairs(surface_entities) do
-								table.insert(entities, entity)
-						end
-				end
-
 				local sentryCoordinates = {}
-				for _, entity in pairs(entities) do
+				for _, entity in pairs(sentryEyes) do
 						if entity and entity.valid then
 								local unit_number = entity.unit_number
-								local entity_name = entity.backer_name or sentry_name
-								local sentry_position = {
-										x = entity.position.x,
-										y = entity.position.y
-								}
+								local entity_name = entity.backer_name or entity.name
+								local sentry_position = entity.position
 								local radius = sentryEye_observeRadius
 
 								local intersect = false
@@ -86,9 +72,7 @@ local function sentryEye_enemyObserver(event, sentry_name)
 												sentryCooldown = sentryCooldown or {}
 												sentryCooldown[entity_name] = sentryCooldown[entity_name] or 0
 
-												if tick - sentryCooldown[entity_name] >= 180 * 10 then
-														sentryCooldown[entity_name] = tick
-
+												if tick - sentryCooldown[entity_name] >= 180 * settings.global["PLORD_sentry_eye_scan_interval"].value then
 														local enemyCount = #enemies
 														local message = {}
 														if enemyCount == 1 then
@@ -101,8 +85,7 @@ local function sentryEye_enemyObserver(event, sentry_name)
 																		entity.position.x, entity.position.y, entity.surface.name, entity_name, enemyCount)
 														end
 														game.print(message)
-														local warning_message = string.format(
-																"[font=default-bold][color=yellow]⚠️[/color][/font]")
+														local warning_message = string.format("[font=default-bold][color=yellow][/color][/font]")
 														rendering.draw_text {
 																text = warning_message,
 																surface = entity.surface,
@@ -119,14 +102,18 @@ local function sentryEye_enemyObserver(event, sentry_name)
 																scale_with_zoom = true,
 																use_rich_text = true
 														}
-
+														
+														sentryCooldown[entity_name] = tick
 												end
 										end
 								end
 						end
 				end
-		end
+
 end
+
+
+
 
 outline_circle_id = nil
 filled_circle_id = nil
@@ -209,6 +196,23 @@ local function sentryEye_turretReturnAmmo()
 
 end
 
+local function handle_reset_recipes()
+		if settings.global["PLORD_reset_recipes"] and settings.global["PLORD_reset_recipes"].value == true then
+				local players = game.players
+				for _, player in pairs(players) do
+						player.force.reset_technology_effects()
+				end
+
+				pcall(function()
+						settings.global["PLORD_reset_recipes"] = {
+								value = false
+						}
+				end)
+
+				game.print {"prometheus.technology_effects_reapplied"}
+		end
+end
+
 
 
 local function event_register()
@@ -219,7 +223,7 @@ local function event_register()
 
 	end)
 
-	script.on_event(defines.events.on_tick, function(event) sentryEye_enemyObserver(event, "PLORD_sentry_eye_entity") end)
+	script.on_nth_tick(settings.global["PLORD_sentry_eye_scan_tick"].value, function(event) sentryEye_enemyObserver(event, "PLORD_sentry_eye_entity") end)
 	
 	script.on_event(defines.events.on_selected_entity_changed, function(event)
 		sentryEye_renderCircle(event)
@@ -244,8 +248,8 @@ local function event_register()
 			}
 			local tile_name = surface.get_tile(entity.position.x, entity.position.y).name
 
-			if entity.name == "PLORD_sentry_eye_entity" and forbidden_tiles[tile_name] then
-					entity.die()
+			if entity.name == "PLORD_sentry_eye_entity" then
+					if forbidden_tiles[tile_name] then entity.die() else table.insert(sentryEyes, entity) end
 			end
 	end)
 	
@@ -259,18 +263,23 @@ local function event_register()
 			triggerEntity_children_event(event, "remove", "PLORD_sentry_eye_entity", {
 				"PLORD_sentry_eye_entity_lightsource"
 			})
+
+			local entity = event.entity
+			if entity and entity.name == "PLORD_sentry_eye_entity" then
+					for i, sentry in ipairs(sentryEyes) do
+							if sentry == entity then
+									table.remove(sentryEyes, i)
+									break
+							end
+					end
+			end
 	end)
 
 	script.on_event(defines.events.on_runtime_mod_setting_changed, function(event)
-			if settings.global["PLORD_reset_recipes"] and settings.global["PLORD_reset_recipes"].value == true then
-					local players = game.players
-					for _, player in pairs(players) do
-							player.force.reset_technology_effects()
-					end
-					settings.global["PLORD_reset_recipes"] = {value = false}
-					game.print{"prometheus.technology_effects_reapplied"}
+			if event.setting == "PLORD_reset_recipes" then
+					handle_reset_recipes()
 			end
-	end) 
+	end)
 end
 
 

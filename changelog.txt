@@ -1,4 +1,14 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.3.6
+Date: 2025-04-13
+  Bugs:
+    - Fixed an error that occurred when changing mod settings while Quick Ride mod was enabled.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.5
+Date: 2025-03-14
+  Changes:
+    - Optimizing “Sentry Eye” scan logic — collect/remove “Sentry Eye” entities in a table instead of scanning surfaces to find them.
+---------------------------------------------------------------------------------------------------
 Version: 0.3.4
 Date: 2024-11-14
   Bugs:
